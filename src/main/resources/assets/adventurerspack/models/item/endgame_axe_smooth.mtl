@@ -1,0 +1,36 @@
+newmtl surface
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_axe_optimized
+newmtl new_armor
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_armor
+newmtl new_steel
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_steel
+newmtl new_edge
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_edge
+newmtl new_recess
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_recess
+newmtl new_red
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_red
+newmtl new_ruby
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_ruby
+newmtl new_shine
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_shine
+newmtl new_grip
+Kd 1 1 1
+Ka 0 0 0
+map_Kd adventurerspack:model/endgame_smooth_grip

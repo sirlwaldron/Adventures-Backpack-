@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " T ",
+    "ILI",
+    " R "
+  ],
+  "key": {
+    "T": { "item": "minecraft:torch" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "L": { "item": "minecraft:lantern" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "item": "adventurerspack:cave_torch" }
+}

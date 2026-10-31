@@ -1,0 +1,39 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "cataclysm_spellbooks:ignis_chestplate_elytra",
+      "required": false
+    },
+    {
+      "id": "cataclysm_spellbooks:cursium_mage_elytra",
+      "required": false
+    },
+    "adventurerspack:ignis_chestplate_elytra",
+    "adventurerspack:cursium_mage_elytra",
+    {
+      "id": "cataclysm_spellbooks:excelsius_speed_visors",
+      "required": false
+    },
+    {
+      "id": "cataclysm_spellbooks:excelsius_speed_chestplate",
+      "required": false
+    },
+    {
+      "id": "cataclysm_spellbooks:excelsius_power_visors",
+      "required": false
+    },
+    {
+      "id": "cataclysm_spellbooks:excelsius_power_chestplate",
+      "required": false
+    },
+    {
+      "id": "cataclysm_spellbooks:excelsius_resist_visors",
+      "required": false
+    },
+    {
+      "id": "cataclysm_spellbooks:excelsius_resist_chestplate",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+    "adventurerspack": {
+        "com.waldron.adventurerspack.client.PackScreen": {
+            "ignore": true,
+            "playerSideOnly": true,
+            "disableFastSwipe": true,
+            "force": true
+        },
+        "com.waldron.adventurerspack.PackMenu": {
+            "ignore": true,
+            "playerSideOnly": true,
+            "force": true
+        }
+    }
+}
+

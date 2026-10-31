@@ -1,0 +1,97 @@
+[
+  {
+    "name": "requiem",
+    "before": 1096,
+    "after": 45
+  },
+  {
+    "name": "endgame",
+    "before": 4810,
+    "after": 123
+  },
+  {
+    "name": "endgame_pickaxe",
+    "before": 2130,
+    "after": 177
+  },
+  {
+    "name": "endgame_axe",
+    "before": 868,
+    "after": 47
+  },
+  {
+    "name": "endgame_shovel",
+    "before": 868,
+    "after": 39
+  },
+  {
+    "name": "endgame_hoe",
+    "before": 810,
+    "after": 32
+  },
+  {
+    "name": "requiem_spear",
+    "before": 2814,
+    "after": 67
+  },
+  {
+    "name": "requiem_shortbow",
+    "before": 1358,
+    "after": 89
+  },
+  {
+    "name": "requiem_recurve",
+    "before": 1946,
+    "after": 89
+  },
+  {
+    "name": "requiem_greatbow",
+    "before": 2368,
+    "after": 125
+  },
+  {
+    "name": "requiem_shortbow_pulling_0",
+    "before": 1408,
+    "after": 91
+  },
+  {
+    "name": "requiem_shortbow_pulling_1",
+    "before": 1413,
+    "after": 91
+  },
+  {
+    "name": "requiem_shortbow_pulling_2",
+    "before": 1420,
+    "after": 91
+  },
+  {
+    "name": "requiem_recurve_pulling_0",
+    "before": 1999,
+    "after": 91
+  },
+  {
+    "name": "requiem_recurve_pulling_1",
+    "before": 2016,
+    "after": 91
+  },
+  {
+    "name": "requiem_recurve_pulling_2",
+    "before": 2024,
+    "after": 91
+  },
+  {
+    "name": "requiem_greatbow_pulling_0",
+    "before": 2426,
+    "after": 127
+  },
+  {
+    "name": "requiem_greatbow_pulling_1",
+    "before": 2437,
+    "after": 127
+  },
+  {
+    "name": "requiem_greatbow_pulling_2",
+    "before": 2445,
+    "after": 127
+  }
+]

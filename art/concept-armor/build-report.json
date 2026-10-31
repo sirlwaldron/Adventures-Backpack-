@@ -1,0 +1,22 @@
+[
+  {
+    "name": "ignis_armor",
+    "cubes": 77,
+    "base_triangles": 924
+  },
+  {
+    "name": "ignis_armor_winged",
+    "cubes": 122,
+    "base_triangles": 1464
+  },
+  {
+    "name": "cursium_mage",
+    "cubes": 82,
+    "base_triangles": 984
+  },
+  {
+    "name": "cursium_mage_elytra",
+    "cubes": 127,
+    "base_triangles": 1524
+  }
+]

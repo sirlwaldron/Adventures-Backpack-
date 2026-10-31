@@ -1,0 +1,121 @@
+[
+  {
+    "name": "endgame_axe",
+    "triangles": 528,
+    "shape": "approved recognizable head revision",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "endgame_hoe",
+    "triangles": 384,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "endgame_pickaxe",
+    "triangles": 548,
+    "shape": "original authored polygons",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "endgame_shovel",
+    "triangles": 416,
+    "shape": "approved recognizable head revision",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_greatbow",
+    "triangles": 1484,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_greatbow_pulling_0",
+    "triangles": 1508,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_greatbow_pulling_1",
+    "triangles": 1508,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_greatbow_pulling_2",
+    "triangles": 1508,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_recurve",
+    "triangles": 1052,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_recurve_pulling_0",
+    "triangles": 1076,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_recurve_pulling_1",
+    "triangles": 1076,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_recurve_pulling_2",
+    "triangles": 1076,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_shortbow",
+    "triangles": 1052,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_shortbow_pulling_0",
+    "triangles": 1076,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_shortbow_pulling_1",
+    "triangles": 1076,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_shortbow_pulling_2",
+    "triangles": 1076,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  },
+  {
+    "name": "requiem_spear",
+    "triangles": 804,
+    "shape": "exact original geometry",
+    "display_preserved": true,
+    "predicates_preserved": true
+  }
+]

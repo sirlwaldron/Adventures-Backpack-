@@ -1,0 +1,22 @@
+{
+  "type": "cataclysm:weapon_fusion",
+  "base": {
+    "item": "cataclysm_spellbooks:cursium_mage_chestplate"
+  },
+  "addition": {
+    "item": "minecraft:elytra"
+  },
+  "result": {
+    "item": "cataclysm_spellbooks:cursium_mage_elytra"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cataclysm"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "cataclysm_spellbooks"
+    }
+  ]
+}

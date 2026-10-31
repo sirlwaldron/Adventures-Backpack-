@@ -1,0 +1,2850 @@
+Compiled from "ExcaliburHand.java"
+public final class com.hypernhieis.client.ExcaliburHand {
+  private static final float[][] WAVE;
+
+  private static final float[][] CHARGE;
+
+  private static final float[][] STRIKE;
+
+  private static final float[][] GUARD;
+
+  private static final float[] SPRINT;
+
+  private static final float[][][] CUTS;
+
+  private static final float BLEND;
+
+  private static final float CUT_BLEND;
+
+  private static final float[] HIT;
+
+  private static final float[] HIT_STOP;
+
+  private static final float GUARD_DOWN;
+
+  private static final float GRIP_X;
+
+  private static final float GRIP_Y;
+
+  private static final float GRIP_Z;
+
+  private static final float OFF_HAND;
+
+  private static final float ARM_WIDTH;
+
+  private static final float ARM_REACH;
+
+  private static final org.joml.Vector3f BLADE;
+
+  private static final org.joml.Vector3f MAIN;
+
+  private static final org.joml.Vector3f HAND_OFFSET;
+
+  private static final org.joml.Vector3f SH_MAIN;
+
+  private static final org.joml.Vector3f SH_OFF;
+
+  private static final org.joml.Vector3f ARM;
+
+  private static final org.joml.Vector3f ARM_SIDE;
+
+  private static final org.joml.Vector3f ARM_FRONT;
+
+  private static final org.joml.Matrix3f BASIS;
+
+  private static final org.joml.Vector3f SHR;
+
+  private static final org.joml.Vector3f SHL;
+
+  private static final float[] READY;
+
+  private static final org.joml.Quaternionf ROLL;
+
+  private static final float[] STATE;
+
+  private static final org.joml.Quaternionf TURN;
+
+  private static final org.joml.Quaternionf GOAL_TURN;
+
+  private static final org.joml.Vector3f SHIFT;
+
+  private static final org.joml.Vector3f PIVOT;
+
+  private static final org.joml.Vector4f POINT;
+
+  private static final com.mojang.blaze3d.vertex.PoseStack PROBE;
+
+  private static final float[][] STROKE;
+
+  private static final float[] WAVE_STROKE;
+
+  private static final float[][] TRAIL_LAYERS;
+
+  private static final float[][] TRAIL_TINT;
+
+  private static final com.hypernhieis.client.render.ExcaliburPaint$Sheet[] TRAIL_SHEET;
+
+  private static final float TRAIL_LONGEST;
+
+  private static final float TRAIL_STAR;
+
+  private static final float[] STAR_TINT;
+
+  private static final int TRAIL_PARTS;
+
+  private static final org.joml.Vector3f SEEN_GUARD;
+
+  private static final org.joml.Vector3f SEEN_TIP;
+
+  private static long seenAt;
+
+  private static final org.joml.Matrix4f HAND;
+
+  private static final org.joml.Vector3f REST_GUARD;
+
+  private static final org.joml.Vector3f REST_TIP;
+
+  private static final org.joml.Vector3f GUARD_FROM;
+
+  private static final org.joml.Vector3f TIP_FROM;
+
+  private static final org.joml.Vector3f GUARD_TO;
+
+  private static final org.joml.Vector3f TIP_TO;
+
+  private static final org.joml.Vector3f GUARD_AT;
+
+  private static final org.joml.Vector3f TIP_AT;
+
+  private static final float[] CURVE;
+
+  private static final org.joml.Quaternionf SHOWN;
+
+  private static final org.joml.Quaternionf FROM;
+
+  private static final org.joml.Quaternionf READY_TURN;
+
+  private static final org.joml.Vector3f SHOWN_SHIFT;
+
+  private static final org.joml.Vector3f FROM_SHIFT;
+
+  private static float source;
+
+  private static float blendAt;
+
+  private static float blendLength;
+
+  private static float sprint;
+
+  private static float lastNow;
+
+  private com.hypernhieis.client.ExcaliburHand();
+    Code:
+       0: aload_0
+       1: invokespecial #112                // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static float hitTick(int);
+    Code:
+       0: getstatic     #118                // Field HIT:[F
+       3: iload_0
+       4: iconst_0
+       5: getstatic     #118                // Field HIT:[F
+       8: arraylength
+       9: iconst_1
+      10: isub
+      11: invokestatic  #124                // Method net/minecraft/util/Mth.m_14045_:(III)I
+      14: faload
+      15: freturn
+
+  private static float warp(float, float, float);
+    Code:
+       0: fload_1
+       1: fconst_0
+       2: fcmpg
+       3: iflt          12
+       6: fload_0
+       7: fload_1
+       8: fcmpg
+       9: ifge          14
+      12: fload_0
+      13: freturn
+      14: fload_0
+      15: fload_1
+      16: fload_2
+      17: fadd
+      18: fcmpg
+      19: ifge          26
+      22: fload_1
+      23: goto          29
+      26: fload_0
+      27: fload_2
+      28: fsub
+      29: freturn
+
+  public static boolean render(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer, net.minecraft.world.InteractionHand, net.minecraft.world.item.ItemStack, float, float, float);
+    Code:
+       0: aload         4
+       2: getstatic     #138                // Field net/minecraft/world/InteractionHand.MAIN_HAND:Lnet/minecraft/world/InteractionHand;
+       5: if_acmpne     35
+       8: aload         5
+      10: invokevirtual #144                // Method net/minecraft/world/item/ItemStack.m_41720_:()Lnet/minecraft/world/item/Item;
+      13: instanceof    #146                // class com/hypernhieis/item/ExcaliburItem
+      16: ifeq          35
+      19: aload_3
+      20: invokevirtual #152                // Method net/minecraft/client/player/AbstractClientPlayer.m_20145_:()Z
+      23: ifne          35
+      26: getstatic     #158                // Field com/hypernhieis/item/ExcaliburKey.HAND_POSES:Lcom/hypernhieis/item/ExcaliburKey;
+      29: invokestatic  #164                // Method com/hypernhieis/ExcaliburConfig.flag:(Lcom/hypernhieis/item/ExcaliburKey;)Z
+      32: ifne          37
+      35: iconst_0
+      36: ireturn
+      37: aload_3
+      38: invokevirtual #168                // Method net/minecraft/client/player/AbstractClientPlayer.m_5737_:()Lnet/minecraft/world/entity/HumanoidArm;
+      41: getstatic     #174                // Field net/minecraft/world/entity/HumanoidArm.RIGHT:Lnet/minecraft/world/entity/HumanoidArm;
+      44: if_acmpne     51
+      47: iconst_1
+      48: goto          52
+      51: iconst_0
+      52: istore        9
+      54: iload         9
+      56: ifeq          63
+      59: iconst_1
+      60: goto          64
+      63: iconst_m1
+      64: istore        10
+      66: iload         9
+      68: ifeq          77
+      71: getstatic     #180                // Field net/minecraft/world/item/ItemDisplayContext.FIRST_PERSON_RIGHT_HAND:Lnet/minecraft/world/item/ItemDisplayContext;
+      74: goto          80
+      77: getstatic     #183                // Field net/minecraft/world/item/ItemDisplayContext.FIRST_PERSON_LEFT_HAND:Lnet/minecraft/world/item/ItemDisplayContext;
+      80: astore        11
+      82: aload_3
+      83: fload         8
+      85: getstatic     #185                // Field STATE:[F
+      88: invokestatic  #191                // Method com/hypernhieis/client/ExcaliburFx.hand:(Lnet/minecraft/world/entity/player/Player;F[F)V
+      91: getstatic     #185                // Field STATE:[F
+      94: aload_3
+      95: invokevirtual #194                // Method net/minecraft/client/player/AbstractClientPlayer.m_20142_:()Z
+      98: ifeq          112
+     101: aload_3
+     102: invokevirtual #197                // Method net/minecraft/client/player/AbstractClientPlayer.m_6117_:()Z
+     105: ifne          112
+     108: iconst_1
+     109: goto          113
+     112: iconst_0
+     113: invokestatic  #204                // Method pose:([FZ)Z
+     116: istore        12
+     118: iload         9
+     120: ifne          162
+     123: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     126: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     129: getfield      #211                // Field org/joml/Quaternionf.y:F
+     132: fneg
+     133: putfield      #211                // Field org/joml/Quaternionf.y:F
+     136: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     139: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     142: getfield      #214                // Field org/joml/Quaternionf.z:F
+     145: fneg
+     146: putfield      #214                // Field org/joml/Quaternionf.z:F
+     149: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     152: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     155: getfield      #221                // Field org/joml/Vector3f.x:F
+     158: fneg
+     159: putfield      #221                // Field org/joml/Vector3f.x:F
+     162: aload_0
+     163: invokevirtual #224                // Method com/mojang/blaze3d/vertex/PoseStack.m_85836_:()V
+     166: iload         12
+     168: ifne          225
+     171: fload         6
+     173: fconst_0
+     174: fcmpl
+     175: ifle          225
+     178: aload_0
+     179: iload         10
+     181: i2f
+     182: ldc           #225                // float -0.4f
+     184: fmul
+     185: fload         6
+     187: invokestatic  #229                // Method net/minecraft/util/Mth.m_14116_:(F)F
+     190: ldc           #230                // float 3.1415927f
+     192: fmul
+     193: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     196: fmul
+     197: ldc           #234                // float 0.2f
+     199: fload         6
+     201: invokestatic  #229                // Method net/minecraft/util/Mth.m_14116_:(F)F
+     204: ldc           #235                // float 6.2831855f
+     206: fmul
+     207: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     210: fmul
+     211: ldc           #236                // float -0.2f
+     213: fload         6
+     215: ldc           #230                // float 3.1415927f
+     217: fmul
+     218: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     221: fmul
+     222: invokevirtual #240                // Method com/mojang/blaze3d/vertex/PoseStack.m_252880_:(FFF)V
+     225: aload_0
+     226: iload         10
+     228: i2f
+     229: ldc           #241                // float 0.56f
+     231: fmul
+     232: ldc           #242                // float -0.52f
+     234: iload         12
+     236: ifeq          243
+     239: fconst_0
+     240: goto          245
+     243: fload         7
+     245: ldc           #243                // float -0.6f
+     247: fmul
+     248: fadd
+     249: ldc           #244                // float -0.72f
+     251: invokevirtual #240                // Method com/mojang/blaze3d/vertex/PoseStack.m_252880_:(FFF)V
+     254: iload         12
+     256: ifne          374
+     259: fload         6
+     261: fconst_0
+     262: fcmpl
+     263: ifle          374
+     266: fload         6
+     268: fload         6
+     270: fmul
+     271: ldc           #230                // float 3.1415927f
+     273: fmul
+     274: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     277: fstore        13
+     279: fload         6
+     281: invokestatic  #229                // Method net/minecraft/util/Mth.m_14116_:(F)F
+     284: ldc           #230                // float 3.1415927f
+     286: fmul
+     287: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     290: fstore        14
+     292: aload_0
+     293: getstatic     #250                // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+     296: iload         10
+     298: i2f
+     299: ldc           #251                // float 45.0f
+     301: fload         13
+     303: ldc           #252                // float -20.0f
+     305: fmul
+     306: fadd
+     307: fmul
+     308: invokeinterface #256,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     313: invokevirtual #260                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     316: aload_0
+     317: getstatic     #263                // Field com/mojang/math/Axis.f_252403_:Lcom/mojang/math/Axis;
+     320: iload         10
+     322: i2f
+     323: fload         14
+     325: fmul
+     326: ldc           #252                // float -20.0f
+     328: fmul
+     329: invokeinterface #256,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     334: invokevirtual #260                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     337: aload_0
+     338: getstatic     #266                // Field com/mojang/math/Axis.f_252529_:Lcom/mojang/math/Axis;
+     341: fload         14
+     343: ldc_w         #267                // float -80.0f
+     346: fmul
+     347: invokeinterface #256,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     352: invokevirtual #260                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     355: aload_0
+     356: getstatic     #250                // Field com/mojang/math/Axis.f_252436_:Lcom/mojang/math/Axis;
+     359: iload         10
+     361: i2f
+     362: ldc_w         #268                // float -45.0f
+     365: fmul
+     366: invokeinterface #256,  2          // InterfaceMethod com/mojang/math/Axis.m_252977_:(F)Lorg/joml/Quaternionf;
+     371: invokevirtual #260                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     374: aload         5
+     376: aload_3
+     377: aload         11
+     379: iload         9
+     381: ifne          388
+     384: iconst_1
+     385: goto          389
+     388: iconst_0
+     389: invokestatic  #272                // Method grip:(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/world/item/ItemDisplayContext;Z)V
+     392: aload_0
+     393: aload_1
+     394: getstatic     #185                // Field STATE:[F
+     397: iload         9
+     399: invokestatic  #276                // Method trail:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;[FZ)V
+     402: getstatic     #185                // Field STATE:[F
+     405: aload_3
+     406: invokevirtual #194                // Method net/minecraft/client/player/AbstractClientPlayer.m_20142_:()Z
+     409: ifeq          423
+     412: aload_3
+     413: invokevirtual #197                // Method net/minecraft/client/player/AbstractClientPlayer.m_6117_:()Z
+     416: ifne          423
+     419: iconst_1
+     420: goto          424
+     423: iconst_0
+     424: invokestatic  #204                // Method pose:([FZ)Z
+     427: pop
+     428: iload         9
+     430: ifne          472
+     433: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     436: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     439: getfield      #211                // Field org/joml/Quaternionf.y:F
+     442: fneg
+     443: putfield      #211                // Field org/joml/Quaternionf.y:F
+     446: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     449: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     452: getfield      #214                // Field org/joml/Quaternionf.z:F
+     455: fneg
+     456: putfield      #214                // Field org/joml/Quaternionf.z:F
+     459: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     462: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     465: getfield      #221                // Field org/joml/Vector3f.x:F
+     468: fneg
+     469: putfield      #221                // Field org/joml/Vector3f.x:F
+     472: aload_0
+     473: invokestatic  #280                // Method seen:(Lcom/mojang/blaze3d/vertex/PoseStack;)V
+     476: getstatic     #283                // Field com/hypernhieis/item/ExcaliburKey.TWO_HANDS:Lcom/hypernhieis/item/ExcaliburKey;
+     479: invokestatic  #164                // Method com/hypernhieis/ExcaliburConfig.flag:(Lcom/hypernhieis/item/ExcaliburKey;)Z
+     482: ifeq          513
+     485: aload_0
+     486: aload_1
+     487: iload_2
+     488: invokestatic  #289                // Method com/hypernhieis/client/render/ExcaliburBladeLayer.lit:(I)I
+     491: aload_3
+     492: iload         9
+     494: iload         10
+     496: iload         12
+     498: ifeq          505
+     501: fconst_0
+     502: goto          510
+     505: fload         7
+     507: ldc           #243                // float -0.6f
+     509: fmul
+     510: invokestatic  #293                // Method arms:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;ZIF)V
+     513: aload_0
+     514: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     517: getfield      #221                // Field org/joml/Vector3f.x:F
+     520: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     523: getfield      #221                // Field org/joml/Vector3f.x:F
+     526: fadd
+     527: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     530: getfield      #296                // Field org/joml/Vector3f.y:F
+     533: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     536: getfield      #296                // Field org/joml/Vector3f.y:F
+     539: fadd
+     540: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     543: getfield      #297                // Field org/joml/Vector3f.z:F
+     546: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     549: getfield      #297                // Field org/joml/Vector3f.z:F
+     552: fadd
+     553: invokevirtual #240                // Method com/mojang/blaze3d/vertex/PoseStack.m_252880_:(FFF)V
+     556: aload_0
+     557: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     560: invokevirtual #260                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     563: aload_0
+     564: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     567: getfield      #221                // Field org/joml/Vector3f.x:F
+     570: fneg
+     571: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     574: getfield      #296                // Field org/joml/Vector3f.y:F
+     577: fneg
+     578: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     581: getfield      #297                // Field org/joml/Vector3f.z:F
+     584: fneg
+     585: invokevirtual #240                // Method com/mojang/blaze3d/vertex/PoseStack.m_252880_:(FFF)V
+     588: invokestatic  #303                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     591: invokevirtual #307                // Method net/minecraft/client/Minecraft.m_91290_:()Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+     594: invokevirtual #313                // Method net/minecraft/client/renderer/entity/EntityRenderDispatcher.m_234586_:()Lnet/minecraft/client/renderer/ItemInHandRenderer;
+     597: aload_3
+     598: aload         5
+     600: aload         11
+     602: iload         9
+     604: ifne          611
+     607: iconst_1
+     608: goto          612
+     611: iconst_0
+     612: aload_0
+     613: aload_1
+     614: iload_2
+     615: invokestatic  #289                // Method com/hypernhieis/client/render/ExcaliburBladeLayer.lit:(I)I
+     618: invokevirtual #319                // Method net/minecraft/client/renderer/ItemInHandRenderer.m_269530_:(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+     621: aload_0
+     622: aload_1
+     623: aload_3
+     624: aload         5
+     626: iload         9
+     628: fload         8
+     630: invokestatic  #323                // Method com/hypernhieis/client/render/ExcaliburBladeLayer.heldAura:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/world/item/ItemStack;ZF)V
+     633: aload_0
+     634: invokevirtual #326                // Method com/mojang/blaze3d/vertex/PoseStack.m_85849_:()V
+     637: iconst_1
+     638: ireturn
+
+  private static void arms(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer, boolean, int, float);
+    Code:
+       0: getstatic     #345                // Field BLADE:Lorg/joml/Vector3f;
+       3: getstatic     #347                // Field REST_TIP:Lorg/joml/Vector3f;
+       6: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+       9: getstatic     #353                // Field REST_GUARD:Lorg/joml/Vector3f;
+      12: invokevirtual #356                // Method org/joml/Vector3f.sub:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      15: invokevirtual #360                // Method org/joml/Vector3f.normalize:()Lorg/joml/Vector3f;
+      18: pop
+      19: getstatic     #362                // Field MAIN:Lorg/joml/Vector3f;
+      22: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+      25: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      28: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+      31: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      34: pop
+      35: getstatic     #367                // Field HAND_OFFSET:Lorg/joml/Vector3f;
+      38: getstatic     #345                // Field BLADE:Lorg/joml/Vector3f;
+      41: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      44: ldc_w         #368                // float -0.11f
+      47: invokevirtual #372                // Method org/joml/Vector3f.mul:(F)Lorg/joml/Vector3f;
+      50: pop
+      51: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+      54: getstatic     #367                // Field HAND_OFFSET:Lorg/joml/Vector3f;
+      57: invokevirtual #376                // Method org/joml/Quaternionf.transform:(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+      60: pop
+      61: getstatic     #367                // Field HAND_OFFSET:Lorg/joml/Vector3f;
+      64: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+      67: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      70: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+      73: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      76: pop
+      77: getstatic     #378                // Field SH_MAIN:Lorg/joml/Vector3f;
+      80: iload         5
+      82: i2f
+      83: getstatic     #380                // Field SHR:Lorg/joml/Vector3f;
+      86: getfield      #221                // Field org/joml/Vector3f.x:F
+      89: ldc           #241                // float 0.56f
+      91: fsub
+      92: fmul
+      93: getstatic     #380                // Field SHR:Lorg/joml/Vector3f;
+      96: getfield      #296                // Field org/joml/Vector3f.y:F
+      99: ldc_w         #381                // float 0.52f
+     102: fadd
+     103: fload         6
+     105: fsub
+     106: getstatic     #380                // Field SHR:Lorg/joml/Vector3f;
+     109: getfield      #297                // Field org/joml/Vector3f.z:F
+     112: ldc_w         #382                // float 0.72f
+     115: fadd
+     116: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     119: pop
+     120: getstatic     #387                // Field SH_OFF:Lorg/joml/Vector3f;
+     123: iload         5
+     125: i2f
+     126: getstatic     #389                // Field SHL:Lorg/joml/Vector3f;
+     129: getfield      #221                // Field org/joml/Vector3f.x:F
+     132: ldc           #241                // float 0.56f
+     134: fsub
+     135: fmul
+     136: getstatic     #389                // Field SHL:Lorg/joml/Vector3f;
+     139: getfield      #296                // Field org/joml/Vector3f.y:F
+     142: ldc_w         #381                // float 0.52f
+     145: fadd
+     146: fload         6
+     148: fsub
+     149: getstatic     #389                // Field SHL:Lorg/joml/Vector3f;
+     152: getfield      #297                // Field org/joml/Vector3f.z:F
+     155: ldc_w         #382                // float 0.72f
+     158: fadd
+     159: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     162: pop
+     163: invokestatic  #303                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+     166: invokevirtual #307                // Method net/minecraft/client/Minecraft.m_91290_:()Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+     169: aload_3
+     170: invokevirtual #393                // Method net/minecraft/client/renderer/entity/EntityRenderDispatcher.m_114382_:(Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/client/renderer/entity/EntityRenderer;
+     173: astore        8
+     175: aload         8
+     177: instanceof    #395                // class net/minecraft/client/renderer/entity/player/PlayerRenderer
+     180: ifeq          278
+     183: aload         8
+     185: checkcast     #395                // class net/minecraft/client/renderer/entity/player/PlayerRenderer
+     188: astore        7
+     190: aload         7
+     192: invokevirtual #399                // Method net/minecraft/client/renderer/entity/player/PlayerRenderer.m_7200_:()Lnet/minecraft/client/model/EntityModel;
+     195: checkcast     #401                // class net/minecraft/client/model/PlayerModel
+     198: astore        8
+     200: aload_0
+     201: aload_1
+     202: iload_2
+     203: aload_3
+     204: aload         7
+     206: iload         4
+     208: ifeq          219
+     211: aload         8
+     213: getfield      #405                // Field net/minecraft/client/model/PlayerModel.f_102811_:Lnet/minecraft/client/model/geom/ModelPart;
+     216: goto          224
+     219: aload         8
+     221: getfield      #408                // Field net/minecraft/client/model/PlayerModel.f_102812_:Lnet/minecraft/client/model/geom/ModelPart;
+     224: iload         4
+     226: getstatic     #378                // Field SH_MAIN:Lorg/joml/Vector3f;
+     229: getstatic     #362                // Field MAIN:Lorg/joml/Vector3f;
+     232: invokestatic  #414                // Method arm:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/client/renderer/entity/player/PlayerRenderer;Lnet/minecraft/client/model/geom/ModelPart;ZLorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+     235: aload_0
+     236: aload_1
+     237: iload_2
+     238: aload_3
+     239: aload         7
+     241: iload         4
+     243: ifeq          254
+     246: aload         8
+     248: getfield      #408                // Field net/minecraft/client/model/PlayerModel.f_102812_:Lnet/minecraft/client/model/geom/ModelPart;
+     251: goto          259
+     254: aload         8
+     256: getfield      #405                // Field net/minecraft/client/model/PlayerModel.f_102811_:Lnet/minecraft/client/model/geom/ModelPart;
+     259: iload         4
+     261: ifne          268
+     264: iconst_1
+     265: goto          269
+     268: iconst_0
+     269: getstatic     #387                // Field SH_OFF:Lorg/joml/Vector3f;
+     272: getstatic     #367                // Field HAND_OFFSET:Lorg/joml/Vector3f;
+     275: invokestatic  #414                // Method arm:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/client/renderer/entity/player/PlayerRenderer;Lnet/minecraft/client/model/geom/ModelPart;ZLorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+     278: return
+
+  private static void arm(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.renderer.entity.player.PlayerRenderer, net.minecraft.client.model.geom.ModelPart, boolean, org.joml.Vector3f, org.joml.Vector3f);
+    Code:
+       0: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+       3: aload         8
+       5: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+       8: aload         7
+      10: invokevirtual #356                // Method org/joml/Vector3f.sub:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      13: pop
+      14: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+      17: invokevirtual #426                // Method org/joml/Vector3f.length:()F
+      20: fstore        9
+      22: fload         9
+      24: ldc_w         #427                // float 0.05f
+      27: fcmpg
+      28: ifge          32
+      31: return
+      32: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+      35: fload         9
+      37: invokevirtual #430                // Method org/joml/Vector3f.div:(F)Lorg/joml/Vector3f;
+      40: pop
+      41: getstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+      44: fconst_0
+      45: fconst_1
+      46: fconst_0
+      47: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+      50: pop
+      51: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+      54: getfield      #296                // Field org/joml/Vector3f.y:F
+      57: invokestatic  #437                // Method java/lang/Math.abs:(F)F
+      60: ldc_w         #438                // float 0.95f
+      63: fcmpl
+      64: ifle          77
+      67: getstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+      70: fconst_0
+      71: fconst_0
+      72: fconst_1
+      73: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+      76: pop
+      77: getstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+      80: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+      83: invokevirtual #441                // Method org/joml/Vector3f.cross:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      86: invokevirtual #360                // Method org/joml/Vector3f.normalize:()Lorg/joml/Vector3f;
+      89: pop
+      90: getstatic     #443                // Field ARM_FRONT:Lorg/joml/Vector3f;
+      93: getstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+      96: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      99: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+     102: invokevirtual #441                // Method org/joml/Vector3f.cross:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     105: pop
+     106: getstatic     #445                // Field BASIS:Lorg/joml/Matrix3f;
+     109: getstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+     112: getfield      #221                // Field org/joml/Vector3f.x:F
+     115: getstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+     118: getfield      #296                // Field org/joml/Vector3f.y:F
+     121: getstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+     124: getfield      #297                // Field org/joml/Vector3f.z:F
+     127: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+     130: getfield      #221                // Field org/joml/Vector3f.x:F
+     133: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+     136: getfield      #296                // Field org/joml/Vector3f.y:F
+     139: getstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+     142: getfield      #297                // Field org/joml/Vector3f.z:F
+     145: getstatic     #443                // Field ARM_FRONT:Lorg/joml/Vector3f;
+     148: getfield      #221                // Field org/joml/Vector3f.x:F
+     151: getstatic     #443                // Field ARM_FRONT:Lorg/joml/Vector3f;
+     154: getfield      #296                // Field org/joml/Vector3f.y:F
+     157: getstatic     #443                // Field ARM_FRONT:Lorg/joml/Vector3f;
+     160: getfield      #297                // Field org/joml/Vector3f.z:F
+     163: invokevirtual #450                // Method org/joml/Matrix3f.set:(FFFFFFFFF)Lorg/joml/Matrix3f;
+     166: pop
+     167: aload_0
+     168: invokevirtual #224                // Method com/mojang/blaze3d/vertex/PoseStack.m_85836_:()V
+     171: aload_0
+     172: aload         7
+     174: getfield      #221                // Field org/joml/Vector3f.x:F
+     177: aload         7
+     179: getfield      #296                // Field org/joml/Vector3f.y:F
+     182: aload         7
+     184: getfield      #297                // Field org/joml/Vector3f.z:F
+     187: invokevirtual #240                // Method com/mojang/blaze3d/vertex/PoseStack.m_252880_:(FFF)V
+     190: aload_0
+     191: getstatic     #452                // Field ROLL:Lorg/joml/Quaternionf;
+     194: getstatic     #445                // Field BASIS:Lorg/joml/Matrix3f;
+     197: invokevirtual #456                // Method org/joml/Quaternionf.setFromNormalized:(Lorg/joml/Matrix3fc;)Lorg/joml/Quaternionf;
+     200: invokevirtual #260                // Method com/mojang/blaze3d/vertex/PoseStack.m_252781_:(Lorg/joml/Quaternionf;)V
+     203: aload_0
+     204: ldc           #42                 // float 0.6f
+     206: fload         9
+     208: ldc           #44                 // float 0.625f
+     210: fdiv
+     211: ldc           #42                 // float 0.6f
+     213: invokevirtual #459                // Method com/mojang/blaze3d/vertex/PoseStack.m_85841_:(FFF)V
+     216: aload_0
+     217: aload         5
+     219: getfield      #462                // Field net/minecraft/client/model/geom/ModelPart.f_104200_:F
+     222: fneg
+     223: ldc_w         #463                // float 16.0f
+     226: fdiv
+     227: aload         5
+     229: getfield      #466                // Field net/minecraft/client/model/geom/ModelPart.f_104201_:F
+     232: fneg
+     233: ldc_w         #463                // float 16.0f
+     236: fdiv
+     237: aload         5
+     239: getfield      #469                // Field net/minecraft/client/model/geom/ModelPart.f_104202_:F
+     242: fneg
+     243: ldc_w         #463                // float 16.0f
+     246: fdiv
+     247: invokevirtual #240                // Method com/mojang/blaze3d/vertex/PoseStack.m_252880_:(FFF)V
+     250: iload         6
+     252: ifeq          267
+     255: aload         4
+     257: aload_0
+     258: aload_1
+     259: iload_2
+     260: aload_3
+     261: invokevirtual #473                // Method net/minecraft/client/renderer/entity/player/PlayerRenderer.m_117770_:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;)V
+     264: goto          276
+     267: aload         4
+     269: aload_0
+     270: aload_1
+     271: iload_2
+     272: aload_3
+     273: invokevirtual #476                // Method net/minecraft/client/renderer/entity/player/PlayerRenderer.m_117813_:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;)V
+     276: aload_0
+     277: invokevirtual #326                // Method com/mojang/blaze3d/vertex/PoseStack.m_85849_:()V
+     280: return
+
+  private static void seen(com.mojang.blaze3d.vertex.PoseStack);
+    Code:
+       0: invokestatic  #303                // Method net/minecraft/client/Minecraft.m_91087_:()Lnet/minecraft/client/Minecraft;
+       3: astore_1
+       4: aload_1
+       5: getfield      #483                // Field net/minecraft/client/Minecraft.f_91063_:Lnet/minecraft/client/renderer/GameRenderer;
+       8: invokevirtual #489                // Method net/minecraft/client/renderer/GameRenderer.m_109153_:()Lnet/minecraft/client/Camera;
+      11: astore_2
+      12: aload_1
+      13: getfield      #493                // Field net/minecraft/client/Minecraft.f_91066_:Lnet/minecraft/client/Options;
+      16: invokevirtual #499                // Method net/minecraft/client/Options.m_231837_:()Lnet/minecraft/client/OptionInstance;
+      19: invokevirtual #505                // Method net/minecraft/client/OptionInstance.m_231551_:()Ljava/lang/Object;
+      22: checkcast     #507                // class java/lang/Integer
+      25: invokevirtual #511                // Method java/lang/Integer.intValue:()I
+      28: i2d
+      29: ldc2_w        #512                // double 0.5d
+      32: dmul
+      33: invokestatic  #517                // Method java/lang/Math.toRadians:(D)D
+      36: invokestatic  #520                // Method java/lang/Math.tan:(D)D
+      39: ldc2_w        #521                // double 35.0d
+      42: invokestatic  #517                // Method java/lang/Math.toRadians:(D)D
+      45: invokestatic  #520                // Method java/lang/Math.tan:(D)D
+      48: ddiv
+      49: d2f
+      50: fstore_3
+      51: getstatic     #524                // Field HAND:Lorg/joml/Matrix4f;
+      54: aload_2
+      55: invokestatic  #530                // Method com/hypernhieis/client/CameraSpace.undoView:(Lnet/minecraft/client/Camera;)Lorg/joml/Matrix4f;
+      58: invokevirtual #535                // Method org/joml/Matrix4f.set:(Lorg/joml/Matrix4fc;)Lorg/joml/Matrix4f;
+      61: aload_0
+      62: invokevirtual #539                // Method com/mojang/blaze3d/vertex/PoseStack.m_85850_:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+      65: invokevirtual #543                // Method com/mojang/blaze3d/vertex/PoseStack$Pose.m_252922_:()Lorg/joml/Matrix4f;
+      68: invokevirtual #545                // Method org/joml/Matrix4f.mul:(Lorg/joml/Matrix4fc;)Lorg/joml/Matrix4f;
+      71: pop
+      72: aload_2
+      73: invokevirtual #550                // Method net/minecraft/client/Camera.m_253058_:()Lorg/joml/Vector3f;
+      76: astore        4
+      78: aload_2
+      79: invokevirtual #553                // Method net/minecraft/client/Camera.m_253028_:()Lorg/joml/Vector3f;
+      82: astore        5
+      84: aload_2
+      85: invokevirtual #556                // Method net/minecraft/client/Camera.m_252775_:()Lorg/joml/Vector3f;
+      88: astore        6
+      90: iconst_0
+      91: istore        7
+      93: iload         7
+      95: iconst_2
+      96: if_icmpge     210
+      99: iload         7
+     101: ifne          110
+     104: getstatic     #558                // Field SEEN_GUARD:Lorg/joml/Vector3f;
+     107: goto          113
+     110: getstatic     #560                // Field SEEN_TIP:Lorg/joml/Vector3f;
+     113: astore        8
+     115: aload         8
+     117: iload         7
+     119: ifne          128
+     122: getstatic     #353                // Field REST_GUARD:Lorg/joml/Vector3f;
+     125: goto          131
+     128: getstatic     #347                // Field REST_TIP:Lorg/joml/Vector3f;
+     131: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     134: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     137: invokevirtual #356                // Method org/joml/Vector3f.sub:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     140: pop
+     141: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     144: aload         8
+     146: invokevirtual #376                // Method org/joml/Quaternionf.transform:(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+     149: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     152: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     155: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     158: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     161: pop
+     162: getstatic     #524                // Field HAND:Lorg/joml/Matrix4f;
+     165: aload         8
+     167: invokevirtual #565                // Method org/joml/Matrix4f.transformPosition:(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+     170: pop
+     171: aload         8
+     173: aload         8
+     175: aload         6
+     177: invokevirtual #569                // Method org/joml/Vector3f.dot:(Lorg/joml/Vector3fc;)F
+     180: fneg
+     181: fload_3
+     182: fmul
+     183: aload         8
+     185: aload         5
+     187: invokevirtual #569                // Method org/joml/Vector3f.dot:(Lorg/joml/Vector3fc;)F
+     190: fload_3
+     191: fmul
+     192: aload         8
+     194: aload         4
+     196: invokevirtual #569                // Method org/joml/Vector3f.dot:(Lorg/joml/Vector3fc;)F
+     199: fneg
+     200: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     203: pop
+     204: iinc          7, 1
+     207: goto          93
+     210: invokestatic  #575                // Method net/minecraft/Util.m_137550_:()J
+     213: putstatic     #577                // Field seenAt:J
+     216: return
+
+  public static boolean blade(org.joml.Vector3f, org.joml.Vector3f);
+    Code:
+       0: invokestatic  #575                // Method net/minecraft/Util.m_137550_:()J
+       3: getstatic     #577                // Field seenAt:J
+       6: lsub
+       7: ldc2_w        #590                // long 150l
+      10: lcmp
+      11: ifle          16
+      14: iconst_0
+      15: ireturn
+      16: aload_0
+      17: getstatic     #558                // Field SEEN_GUARD:Lorg/joml/Vector3f;
+      20: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      23: pop
+      24: aload_1
+      25: getstatic     #560                // Field SEEN_TIP:Lorg/joml/Vector3f;
+      28: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      31: pop
+      32: iconst_1
+      33: ireturn
+
+  public static boolean trails();
+    Code:
+       0: getstatic     #158                // Field com/hypernhieis/item/ExcaliburKey.HAND_POSES:Lcom/hypernhieis/item/ExcaliburKey;
+       3: invokestatic  #164                // Method com/hypernhieis/ExcaliburConfig.flag:(Lcom/hypernhieis/item/ExcaliburKey;)Z
+       6: ifeq          31
+       9: ldc_w         #596                // String photon
+      12: invokestatic  #602                // Method com/hypernhieis/client/ShaderCompat.packNameHas:(Ljava/lang/String;)Z
+      15: ifne          31
+      18: ldc_w         #604                // String makeup
+      21: invokestatic  #602                // Method com/hypernhieis/client/ShaderCompat.packNameHas:(Ljava/lang/String;)Z
+      24: ifne          31
+      27: iconst_1
+      28: goto          32
+      31: iconst_0
+      32: ireturn
+
+  private static void trail(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, float[], boolean);
+    Code:
+       0: invokestatic  #607                // Method com/hypernhieis/client/ExcaliburFx.effects:()F
+       3: fstore        4
+       5: fload         4
+       7: ldc_w         #608                // float 0.01f
+      10: fcmpg
+      11: ifle          26
+      14: invokestatic  #611                // Method com/hypernhieis/client/ShaderCompat.isShadowPass:()Z
+      17: ifne          26
+      20: invokestatic  #613                // Method trails:()Z
+      23: ifne          27
+      26: return
+      27: aload_2
+      28: iconst_0
+      29: faload
+      30: fstore        5
+      32: ldc_w         #614                // float -1.0f
+      35: fstore        9
+      37: fconst_0
+      38: fstore        10
+      40: fload         5
+      42: aload_2
+      43: bipush        8
+      45: faload
+      46: fsub
+      47: getstatic     #616                // Field WAVE_STROKE:[F
+      50: iconst_1
+      51: faload
+      52: ldc           #77                 // float 5.2f
+      54: fadd
+      55: fcmpg
+      56: ifge          81
+      59: getstatic     #618                // Field WAVE:[[F
+      62: astore        6
+      64: getstatic     #616                // Field WAVE_STROKE:[F
+      67: astore        7
+      69: fload         5
+      71: aload_2
+      72: bipush        8
+      74: faload
+      75: fsub
+      76: fstore        8
+      78: goto          168
+      81: aload_2
+      82: iconst_2
+      83: faload
+      84: f2i
+      85: iconst_0
+      86: getstatic     #620                // Field CUTS:[[[F
+      89: arraylength
+      90: iconst_1
+      91: isub
+      92: invokestatic  #124                // Method net/minecraft/util/Mth.m_14045_:(III)I
+      95: istore        11
+      97: getstatic     #620                // Field CUTS:[[[F
+     100: iload         11
+     102: aaload
+     103: astore        6
+     105: getstatic     #622                // Field STROKE:[[F
+     108: iload         11
+     110: aaload
+     111: astore        7
+     113: fload         5
+     115: aload_2
+     116: iconst_1
+     117: faload
+     118: fsub
+     119: fstore        8
+     121: aload_2
+     122: bipush        10
+     124: faload
+     125: fconst_0
+     126: fcmpl
+     127: ifle          139
+     130: getstatic     #118                // Field HIT:[F
+     133: iload         11
+     135: faload
+     136: goto          142
+     139: ldc_w         #614                // float -1.0f
+     142: fstore        9
+     144: getstatic     #625                // Field HIT_STOP:[F
+     147: iload         11
+     149: faload
+     150: fstore        10
+     152: fload         8
+     154: fload         9
+     156: fload         10
+     158: invokestatic  #627                // Method warp:(FFF)F
+     161: fstore        8
+     163: ldc_w         #614                // float -1.0f
+     166: fstore        9
+     168: fload         8
+     170: aload         7
+     172: iconst_0
+     173: faload
+     174: fcmpg
+     175: ifge          179
+     178: return
+     179: invokestatic  #630                // Method com/hypernhieis/client/ShaderCompat.shadersOn:()Z
+     182: istore        11
+     184: aload_0
+     185: invokevirtual #539                // Method com/mojang/blaze3d/vertex/PoseStack.m_85850_:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+     188: astore        12
+     190: iconst_0
+     191: istore        13
+     193: iload         13
+     195: getstatic     #632                // Field TRAIL_LAYERS:[[F
+     198: arraylength
+     199: if_icmpge     569
+     202: getstatic     #632                // Field TRAIL_LAYERS:[[F
+     205: iload         13
+     207: aaload
+     208: astore        14
+     210: aload         14
+     212: iconst_0
+     213: faload
+     214: fstore        15
+     216: aload         14
+     218: iconst_1
+     219: faload
+     220: fstore        16
+     222: aload         14
+     224: iconst_2
+     225: faload
+     226: fstore        17
+     228: fload         8
+     230: aload         14
+     232: iconst_5
+     233: faload
+     234: fsub
+     235: fstore        18
+     237: fload         18
+     239: aload         7
+     241: iconst_1
+     242: faload
+     243: invokestatic  #636                // Method java/lang/Math.min:(FF)F
+     246: fstore        19
+     248: aload         7
+     250: iconst_0
+     251: faload
+     252: fload         18
+     254: fload         15
+     256: fsub
+     257: invokestatic  #639                // Method java/lang/Math.max:(FF)F
+     260: fstore        20
+     262: iload         11
+     264: ifeq          272
+     267: iload         13
+     269: ifeq          563
+     272: fload         19
+     274: fload         20
+     276: fsub
+     277: ldc_w         #427                // float 0.05f
+     280: fcmpg
+     281: ifge          287
+     284: goto          563
+     287: aload_1
+     288: getstatic     #641                // Field TRAIL_SHEET:[Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     291: iload         13
+     293: aaload
+     294: getfield      #645                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.texture:Lnet/minecraft/resources/ResourceLocation;
+     297: iload         11
+     299: invokestatic  #649                // Method buffer:(Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/resources/ResourceLocation;Z)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     302: astore        21
+     304: fload         5
+     306: aload         14
+     308: iconst_4
+     309: faload
+     310: fmul
+     311: fstore        22
+     313: fload         4
+     315: aload         14
+     317: iconst_3
+     318: faload
+     319: fmul
+     320: fstore        23
+     322: fconst_0
+     323: fstore        24
+     325: fconst_0
+     326: fstore        25
+     328: iconst_0
+     329: istore        26
+     331: iload         26
+     333: bipush        40
+     335: if_icmpgt     563
+     338: iload         26
+     340: i2f
+     341: ldc_w         #652                // float 40.0f
+     344: fdiv
+     345: fload         20
+     347: fload         19
+     349: invokestatic  #655                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     352: fstore        27
+     354: aload         6
+     356: fload         27
+     358: iload_3
+     359: invokestatic  #658                // Method blade:([[FFZ)V
+     362: fload         18
+     364: fload         27
+     366: fsub
+     367: fload         15
+     369: fdiv
+     370: fconst_0
+     371: fconst_1
+     372: invokestatic  #661                // Method net/minecraft/util/Mth.m_14036_:(FFF)F
+     375: fstore        28
+     377: fload         17
+     379: fload         17
+     381: fload         16
+     383: fsub
+     384: ldc_w         #662                // float 0.12f
+     387: ldc_w         #663                // float 0.88f
+     390: fconst_1
+     391: fload         28
+     393: fsub
+     394: f2d
+     395: ldc2_w        #664                // double 0.7d
+     398: invokestatic  #669                // Method java/lang/Math.pow:(DD)D
+     401: d2f
+     402: fmul
+     403: fadd
+     404: fmul
+     405: fsub
+     406: fstore        29
+     408: getstatic     #671                // Field GUARD_TO:Lorg/joml/Vector3f;
+     411: getstatic     #673                // Field GUARD_AT:Lorg/joml/Vector3f;
+     414: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     417: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     420: fload         29
+     422: invokevirtual #679                // Method org/joml/Vector3f.lerp:(Lorg/joml/Vector3fc;F)Lorg/joml/Vector3f;
+     425: pop
+     426: getstatic     #681                // Field TIP_TO:Lorg/joml/Vector3f;
+     429: getstatic     #673                // Field GUARD_AT:Lorg/joml/Vector3f;
+     432: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     435: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     438: fload         17
+     440: invokevirtual #679                // Method org/joml/Vector3f.lerp:(Lorg/joml/Vector3fc;F)Lorg/joml/Vector3f;
+     443: pop
+     444: fload         27
+     446: aload         7
+     448: iconst_0
+     449: faload
+     450: fsub
+     451: ldc           #42                 // float 0.6f
+     453: fdiv
+     454: fconst_0
+     455: fconst_1
+     456: invokestatic  #661                // Method net/minecraft/util/Mth.m_14036_:(FFF)F
+     459: fstore        30
+     461: iload         26
+     463: ifle          529
+     466: aload         21
+     468: aload         12
+     470: getstatic     #683                // Field GUARD_FROM:Lorg/joml/Vector3f;
+     473: getstatic     #685                // Field TIP_FROM:Lorg/joml/Vector3f;
+     476: getstatic     #671                // Field GUARD_TO:Lorg/joml/Vector3f;
+     479: getstatic     #681                // Field TIP_TO:Lorg/joml/Vector3f;
+     482: fload         24
+     484: fload         22
+     486: fadd
+     487: fload         28
+     489: fload         22
+     491: fadd
+     492: fload         24
+     494: iload         11
+     496: invokestatic  #689                // Method fade:(FZ)F
+     499: fload         23
+     501: fmul
+     502: fload         25
+     504: fmul
+     505: fload         28
+     507: iload         11
+     509: invokestatic  #689                // Method fade:(FZ)F
+     512: fload         23
+     514: fmul
+     515: fload         30
+     517: fmul
+     518: iload         11
+     520: getstatic     #691                // Field TRAIL_TINT:[[F
+     523: iload         13
+     525: aaload
+     526: invokestatic  #695                // Method piece:(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;FFFFZ[F)V
+     529: getstatic     #683                // Field GUARD_FROM:Lorg/joml/Vector3f;
+     532: getstatic     #671                // Field GUARD_TO:Lorg/joml/Vector3f;
+     535: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     538: pop
+     539: getstatic     #685                // Field TIP_FROM:Lorg/joml/Vector3f;
+     542: getstatic     #681                // Field TIP_TO:Lorg/joml/Vector3f;
+     545: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     548: pop
+     549: fload         28
+     551: fstore        24
+     553: fload         30
+     555: fstore        25
+     557: iinc          26, 1
+     560: goto          331
+     563: iinc          13, 1
+     566: goto          193
+     569: fload         8
+     571: aload         7
+     573: iconst_0
+     574: faload
+     575: fsub
+     576: aload         7
+     578: iconst_1
+     579: faload
+     580: aload         7
+     582: iconst_0
+     583: faload
+     584: fsub
+     585: fdiv
+     586: fstore        13
+     588: fload         13
+     590: fconst_0
+     591: fcmpl
+     592: iflt          804
+     595: fload         13
+     597: fconst_1
+     598: fcmpg
+     599: ifgt          804
+     602: aload         6
+     604: fload         8
+     606: iload_3
+     607: invokestatic  #658                // Method blade:([[FFZ)V
+     610: fload         4
+     612: fload         13
+     614: ldc           #230                // float 3.1415927f
+     616: fmul
+     617: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     620: fmul
+     621: iload         11
+     623: ifeq          632
+     626: ldc_w         #696                // float 0.8f
+     629: goto          633
+     632: fconst_1
+     633: fmul
+     634: fstore        14
+     636: fload         5
+     638: ldc_w         #697                // float 0.9f
+     641: fmul
+     642: invokestatic  #700                // Method net/minecraft/util/Mth.m_14089_:(F)F
+     645: ldc           #79                 // float 0.13f
+     647: fmul
+     648: fstore        15
+     650: fload         5
+     652: ldc_w         #697                // float 0.9f
+     655: fmul
+     656: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     659: ldc           #79                 // float 0.13f
+     661: fmul
+     662: fstore        16
+     664: getstatic     #683                // Field GUARD_FROM:Lorg/joml/Vector3f;
+     667: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     670: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     673: fload         15
+     675: fneg
+     676: fload         16
+     678: fadd
+     679: fload         16
+     681: fneg
+     682: fload         15
+     684: fsub
+     685: fconst_0
+     686: invokevirtual #702                // Method org/joml/Vector3f.add:(FFF)Lorg/joml/Vector3f;
+     689: pop
+     690: getstatic     #671                // Field GUARD_TO:Lorg/joml/Vector3f;
+     693: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     696: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     699: fload         15
+     701: fload         16
+     703: fadd
+     704: fload         16
+     706: fload         15
+     708: fsub
+     709: fconst_0
+     710: invokevirtual #702                // Method org/joml/Vector3f.add:(FFF)Lorg/joml/Vector3f;
+     713: pop
+     714: getstatic     #681                // Field TIP_TO:Lorg/joml/Vector3f;
+     717: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     720: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     723: fload         15
+     725: fload         16
+     727: fsub
+     728: fload         16
+     730: fload         15
+     732: fadd
+     733: fconst_0
+     734: invokevirtual #702                // Method org/joml/Vector3f.add:(FFF)Lorg/joml/Vector3f;
+     737: pop
+     738: getstatic     #685                // Field TIP_FROM:Lorg/joml/Vector3f;
+     741: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     744: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     747: fload         15
+     749: fneg
+     750: fload         16
+     752: fsub
+     753: fload         16
+     755: fneg
+     756: fload         15
+     758: fadd
+     759: fconst_0
+     760: invokevirtual #702                // Method org/joml/Vector3f.add:(FFF)Lorg/joml/Vector3f;
+     763: pop
+     764: aload_1
+     765: getstatic     #706                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.STAR:Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     768: getfield      #645                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.texture:Lnet/minecraft/resources/ResourceLocation;
+     771: iload         11
+     773: invokestatic  #649                // Method buffer:(Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/resources/ResourceLocation;Z)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+     776: aload         12
+     778: getstatic     #683                // Field GUARD_FROM:Lorg/joml/Vector3f;
+     781: getstatic     #685                // Field TIP_FROM:Lorg/joml/Vector3f;
+     784: getstatic     #671                // Field GUARD_TO:Lorg/joml/Vector3f;
+     787: getstatic     #681                // Field TIP_TO:Lorg/joml/Vector3f;
+     790: fconst_0
+     791: fconst_1
+     792: fload         14
+     794: fload         14
+     796: iload         11
+     798: getstatic     #708                // Field STAR_TINT:[F
+     801: invokestatic  #695                // Method piece:(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Vector3f;FFFFZ[F)V
+     804: return
+
+  private static com.mojang.blaze3d.vertex.VertexConsumer buffer(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.resources.ResourceLocation, boolean);
+    Code:
+       0: aload_0
+       1: iload_2
+       2: ifeq          15
+       5: aload_1
+       6: invokestatic  #744                // Method com/hypernhieis/client/render/GlowLayers.straight:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/resources/ResourceLocation;
+       9: invokestatic  #750                // Method net/minecraft/client/renderer/RenderType.m_234338_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+      12: goto          19
+      15: aload_1
+      16: invokestatic  #753                // Method net/minecraft/client/renderer/RenderType.m_110488_:(Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+      19: invokeinterface #759,  2          // InterfaceMethod net/minecraft/client/renderer/MultiBufferSource.m_6299_:(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+      24: areturn
+
+  private static void blade(float[][], float, boolean);
+    Code:
+       0: aload_0
+       1: fload_1
+       2: invokestatic  #764                // Method sampleDense:([[FF)V
+       5: iload_2
+       6: ifne          48
+       9: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+      12: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+      15: getfield      #211                // Field org/joml/Quaternionf.y:F
+      18: fneg
+      19: putfield      #211                // Field org/joml/Quaternionf.y:F
+      22: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+      25: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+      28: getfield      #214                // Field org/joml/Quaternionf.z:F
+      31: fneg
+      32: putfield      #214                // Field org/joml/Quaternionf.z:F
+      35: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+      38: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+      41: getfield      #221                // Field org/joml/Vector3f.x:F
+      44: fneg
+      45: putfield      #221                // Field org/joml/Vector3f.x:F
+      48: getstatic     #673                // Field GUARD_AT:Lorg/joml/Vector3f;
+      51: getstatic     #353                // Field REST_GUARD:Lorg/joml/Vector3f;
+      54: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      57: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+      60: invokevirtual #356                // Method org/joml/Vector3f.sub:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      63: pop
+      64: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+      67: getstatic     #673                // Field GUARD_AT:Lorg/joml/Vector3f;
+      70: invokevirtual #376                // Method org/joml/Quaternionf.transform:(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+      73: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+      76: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      79: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+      82: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      85: pop
+      86: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+      89: getstatic     #347                // Field REST_TIP:Lorg/joml/Vector3f;
+      92: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+      95: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+      98: invokevirtual #356                // Method org/joml/Vector3f.sub:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     101: pop
+     102: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     105: getstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     108: invokevirtual #376                // Method org/joml/Quaternionf.transform:(Lorg/joml/Vector3f;)Lorg/joml/Vector3f;
+     111: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     114: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     117: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     120: invokevirtual #365                // Method org/joml/Vector3f.add:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     123: pop
+     124: return
+
+  private static float fade(float, boolean);
+    Code:
+       0: iload_1
+       1: ifeq          20
+       4: fload_0
+       5: ldc_w         #765                // float 0.75f
+       8: fcmpg
+       9: ifge          18
+      12: ldc_w         #696                // float 0.8f
+      15: goto          19
+      18: fconst_0
+      19: freturn
+      20: fconst_1
+      21: fload_0
+      22: fsub
+      23: fconst_1
+      24: fload_0
+      25: fsub
+      26: fmul
+      27: freturn
+
+  private static void piece(com.mojang.blaze3d.vertex.VertexConsumer, com.mojang.blaze3d.vertex.PoseStack$Pose, org.joml.Vector3f, org.joml.Vector3f, org.joml.Vector3f, org.joml.Vector3f, float, float, float, float, boolean, float[]);
+    Code:
+       0: ldc_w         #766                // int 15728880
+       3: istore        12
+       5: aload         11
+       7: iconst_0
+       8: faload
+       9: fstore        13
+      11: aload         11
+      13: iconst_1
+      14: faload
+      15: fstore        14
+      17: aload         11
+      19: iconst_2
+      20: faload
+      21: fstore        15
+      23: iconst_0
+      24: istore        16
+      26: iload         16
+      28: iconst_2
+      29: if_icmpge     210
+      32: iload         16
+      34: ifne          41
+      37: iconst_1
+      38: goto          42
+      41: iconst_0
+      42: istore        17
+      44: aload_0
+      45: aload_1
+      46: iload         17
+      48: ifeq          55
+      51: aload_2
+      52: goto          56
+      55: aload_3
+      56: fload         6
+      58: iload         17
+      60: ifeq          67
+      63: fconst_1
+      64: goto          68
+      67: fconst_0
+      68: fload         13
+      70: fload         14
+      72: fload         15
+      74: fload         8
+      76: iload         10
+      78: iload         12
+      80: invokestatic  #770                // Method corner:(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Vector3f;FFFFFFZI)V
+      83: aload_0
+      84: aload_1
+      85: iload         17
+      87: ifeq          95
+      90: aload         4
+      92: goto          97
+      95: aload         5
+      97: fload         7
+      99: iload         17
+     101: ifeq          108
+     104: fconst_1
+     105: goto          109
+     108: fconst_0
+     109: fload         13
+     111: fload         14
+     113: fload         15
+     115: fload         9
+     117: iload         10
+     119: iload         12
+     121: invokestatic  #770                // Method corner:(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Vector3f;FFFFFFZI)V
+     124: aload_0
+     125: aload_1
+     126: iload         17
+     128: ifeq          136
+     131: aload         5
+     133: goto          138
+     136: aload         4
+     138: fload         7
+     140: iload         17
+     142: ifeq          149
+     145: fconst_0
+     146: goto          150
+     149: fconst_1
+     150: fload         13
+     152: fload         14
+     154: fload         15
+     156: fload         9
+     158: iload         10
+     160: iload         12
+     162: invokestatic  #770                // Method corner:(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Vector3f;FFFFFFZI)V
+     165: aload_0
+     166: aload_1
+     167: iload         17
+     169: ifeq          176
+     172: aload_3
+     173: goto          177
+     176: aload_2
+     177: fload         6
+     179: iload         17
+     181: ifeq          188
+     184: fconst_0
+     185: goto          189
+     188: fconst_1
+     189: fload         13
+     191: fload         14
+     193: fload         15
+     195: fload         8
+     197: iload         10
+     199: iload         12
+     201: invokestatic  #770                // Method corner:(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lorg/joml/Vector3f;FFFFFFZI)V
+     204: iinc          16, 1
+     207: goto          26
+     210: return
+
+  private static void corner(com.mojang.blaze3d.vertex.VertexConsumer, com.mojang.blaze3d.vertex.PoseStack$Pose, org.joml.Vector3f, float, float, float, float, float, float, boolean, int);
+    Code:
+       0: iload         9
+       2: ifeq          9
+       5: fconst_1
+       6: goto          11
+       9: fload         8
+      11: fstore        11
+      13: aload_0
+      14: aload_1
+      15: aload_2
+      16: getfield      #221                // Field org/joml/Vector3f.x:F
+      19: aload_2
+      20: getfield      #296                // Field org/joml/Vector3f.y:F
+      23: aload_2
+      24: getfield      #297                // Field org/joml/Vector3f.z:F
+      27: fload_3
+      28: fload         4
+      30: fload         5
+      32: fload         11
+      34: fmul
+      35: fload         6
+      37: fload         11
+      39: fmul
+      40: fload         7
+      42: fload         11
+      44: fmul
+      45: iload         9
+      47: ifeq          55
+      50: fload         8
+      52: goto          56
+      55: fconst_1
+      56: iload         10
+      58: fconst_0
+      59: fconst_1
+      60: fconst_0
+      61: invokestatic  #789                // Method com/hypernhieis/client/render/VertexHelper.vertex:(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;FFFFFFFFFIFFF)V
+      64: return
+
+  private static void grip(net.minecraft.world.item.ItemStack, net.minecraft.client.player.AbstractClientPlayer, net.minecraft.world.item.ItemDisplayContext, boolean);
+    Code:
+       0: getstatic     #796                // Field PROBE:Lcom/mojang/blaze3d/vertex/PoseStack;
+       3: invokevirtual #224                // Method com/mojang/blaze3d/vertex/PoseStack.m_85836_:()V
+       6: getstatic     #796                // Field PROBE:Lcom/mojang/blaze3d/vertex/PoseStack;
+       9: aload_0
+      10: aload_1
+      11: aload_2
+      12: iload_3
+      13: invokestatic  #800                // Method com/hypernhieis/client/render/ExcaliburBladeLayer.inModel:(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/world/item/ItemDisplayContext;Z)V
+      16: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+      19: ldc           #35                 // float 0.5f
+      21: ldc_w         #803                // float -0.0625f
+      24: ldc           #35                 // float 0.5f
+      26: fconst_1
+      27: invokevirtual #808                // Method org/joml/Vector4f.set:(FFFF)Lorg/joml/Vector4f;
+      30: getstatic     #796                // Field PROBE:Lcom/mojang/blaze3d/vertex/PoseStack;
+      33: invokevirtual #539                // Method com/mojang/blaze3d/vertex/PoseStack.m_85850_:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+      36: invokevirtual #543                // Method com/mojang/blaze3d/vertex/PoseStack$Pose.m_252922_:()Lorg/joml/Matrix4f;
+      39: invokevirtual #811                // Method org/joml/Vector4f.mul:(Lorg/joml/Matrix4fc;)Lorg/joml/Vector4f;
+      42: pop
+      43: getstatic     #353                // Field REST_GUARD:Lorg/joml/Vector3f;
+      46: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+      49: getfield      #812                // Field org/joml/Vector4f.x:F
+      52: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+      55: getfield      #813                // Field org/joml/Vector4f.y:F
+      58: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+      61: getfield      #814                // Field org/joml/Vector4f.z:F
+      64: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+      67: pop
+      68: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+      71: ldc           #35                 // float 0.5f
+      73: ldc_w         #815                // float 1.9375f
+      76: ldc           #35                 // float 0.5f
+      78: fconst_1
+      79: invokevirtual #808                // Method org/joml/Vector4f.set:(FFFF)Lorg/joml/Vector4f;
+      82: getstatic     #796                // Field PROBE:Lcom/mojang/blaze3d/vertex/PoseStack;
+      85: invokevirtual #539                // Method com/mojang/blaze3d/vertex/PoseStack.m_85850_:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+      88: invokevirtual #543                // Method com/mojang/blaze3d/vertex/PoseStack$Pose.m_252922_:()Lorg/joml/Matrix4f;
+      91: invokevirtual #811                // Method org/joml/Vector4f.mul:(Lorg/joml/Matrix4fc;)Lorg/joml/Vector4f;
+      94: pop
+      95: getstatic     #347                // Field REST_TIP:Lorg/joml/Vector3f;
+      98: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     101: getfield      #812                // Field org/joml/Vector4f.x:F
+     104: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     107: getfield      #813                // Field org/joml/Vector4f.y:F
+     110: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     113: getfield      #814                // Field org/joml/Vector4f.z:F
+     116: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     119: pop
+     120: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     123: ldc           #35                 // float 0.5f
+     125: ldc           #37                 // float -0.5f
+     127: ldc           #35                 // float 0.5f
+     129: fconst_1
+     130: invokevirtual #808                // Method org/joml/Vector4f.set:(FFFF)Lorg/joml/Vector4f;
+     133: getstatic     #796                // Field PROBE:Lcom/mojang/blaze3d/vertex/PoseStack;
+     136: invokevirtual #539                // Method com/mojang/blaze3d/vertex/PoseStack.m_85850_:()Lcom/mojang/blaze3d/vertex/PoseStack$Pose;
+     139: invokevirtual #543                // Method com/mojang/blaze3d/vertex/PoseStack$Pose.m_252922_:()Lorg/joml/Matrix4f;
+     142: invokevirtual #811                // Method org/joml/Vector4f.mul:(Lorg/joml/Matrix4fc;)Lorg/joml/Vector4f;
+     145: pop
+     146: getstatic     #796                // Field PROBE:Lcom/mojang/blaze3d/vertex/PoseStack;
+     149: invokevirtual #326                // Method com/mojang/blaze3d/vertex/PoseStack.m_85849_:()V
+     152: getstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     155: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     158: getfield      #812                // Field org/joml/Vector4f.x:F
+     161: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     164: getfield      #813                // Field org/joml/Vector4f.y:F
+     167: getstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     170: getfield      #814                // Field org/joml/Vector4f.z:F
+     173: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     176: pop
+     177: return
+
+  private static boolean pose(float[], boolean);
+    Code:
+       0: aload_0
+       1: iconst_0
+       2: faload
+       3: fstore_2
+       4: getstatic     #380                // Field SHR:Lorg/joml/Vector3f;
+       7: getstatic     #817                // Field READY:[F
+      10: bipush        7
+      12: faload
+      13: getstatic     #817                // Field READY:[F
+      16: bipush        8
+      18: faload
+      19: getstatic     #817                // Field READY:[F
+      22: bipush        9
+      24: faload
+      25: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+      28: pop
+      29: getstatic     #389                // Field SHL:Lorg/joml/Vector3f;
+      32: getstatic     #817                // Field READY:[F
+      35: bipush        10
+      37: faload
+      38: getstatic     #817                // Field READY:[F
+      41: bipush        11
+      43: faload
+      44: getstatic     #817                // Field READY:[F
+      47: bipush        12
+      49: faload
+      50: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+      53: pop
+      54: getstatic     #820                // Field com/hypernhieis/item/ExcaliburKey.SWAY:Lcom/hypernhieis/item/ExcaliburKey;
+      57: invokestatic  #824                // Method com/hypernhieis/ExcaliburConfig.number:(Lcom/hypernhieis/item/ExcaliburKey;)D
+      60: d2f
+      61: fstore_3
+      62: iconst_1
+      63: istore        4
+      65: fload_2
+      66: getstatic     #826                // Field lastNow:F
+      69: fsub
+      70: fconst_0
+      71: fconst_2
+      72: invokestatic  #661                // Method net/minecraft/util/Mth.m_14036_:(FFF)F
+      75: fstore        6
+      77: fload_2
+      78: putstatic     #826                // Field lastNow:F
+      81: getstatic     #828                // Field sprint:F
+      84: iload_1
+      85: ifeq          94
+      88: ldc_w         #829                // float 0.22f
+      91: goto          97
+      94: ldc_w         #830                // float -0.22f
+      97: fload         6
+      99: fmul
+     100: fadd
+     101: fconst_0
+     102: fconst_1
+     103: invokestatic  #661                // Method net/minecraft/util/Mth.m_14036_:(FFF)F
+     106: putstatic     #828                // Field sprint:F
+     109: fload_2
+     110: aload_0
+     111: bipush        9
+     113: faload
+     114: fsub
+     115: getstatic     #832                // Field STRIKE:[[F
+     118: invokestatic  #835                // Method length:([[F)F
+     121: fcmpg
+     122: ifge          150
+     125: getstatic     #832                // Field STRIKE:[[F
+     128: fload_2
+     129: aload_0
+     130: bipush        9
+     132: faload
+     133: fsub
+     134: invokestatic  #764                // Method sampleDense:([[FF)V
+     137: ldc_w         #836                // float 1000000.0f
+     140: aload_0
+     141: bipush        9
+     143: faload
+     144: fadd
+     145: fstore        5
+     147: goto          666
+     150: fload_2
+     151: aload_0
+     152: bipush        8
+     154: faload
+     155: fsub
+     156: getstatic     #618                // Field WAVE:[[F
+     159: invokestatic  #835                // Method length:([[F)F
+     162: fcmpg
+     163: ifge          191
+     166: getstatic     #618                // Field WAVE:[[F
+     169: fload_2
+     170: aload_0
+     171: bipush        8
+     173: faload
+     174: fsub
+     175: invokestatic  #764                // Method sampleDense:([[FF)V
+     178: ldc_w         #837                // float 2000000.0f
+     181: aload_0
+     182: bipush        8
+     184: faload
+     185: fadd
+     186: fstore        5
+     188: goto          666
+     191: aload_0
+     192: iconst_3
+     193: faload
+     194: fconst_0
+     195: fcmpl
+     196: iflt          296
+     199: getstatic     #839                // Field CHARGE:[[F
+     202: fload_2
+     203: aload_0
+     204: iconst_3
+     205: faload
+     206: fsub
+     207: invokestatic  #764                // Method sampleDense:([[FF)V
+     210: ldc_w         #840                // float 3000000.0f
+     213: aload_0
+     214: iconst_3
+     215: faload
+     216: fadd
+     217: fstore        5
+     219: fload_2
+     220: aload_0
+     221: iconst_3
+     222: faload
+     223: fsub
+     224: fconst_1
+     225: aload_0
+     226: iconst_4
+     227: faload
+     228: invokestatic  #639                // Method java/lang/Math.max:(FF)F
+     231: fdiv
+     232: fconst_0
+     233: fconst_1
+     234: invokestatic  #661                // Method net/minecraft/util/Mth.m_14036_:(FFF)F
+     237: fstore        7
+     239: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     242: fload_2
+     243: ldc_w         #841                // float 2.3f
+     246: fmul
+     247: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     250: fload         7
+     252: fmul
+     253: ldc_w         #842                // float 1.6f
+     256: fmul
+     257: ldc_w         #843                // float 0.017453292f
+     260: fmul
+     261: invokevirtual #846                // Method org/joml/Quaternionf.rotateZ:(F)Lorg/joml/Quaternionf;
+     264: pop
+     265: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     268: fload_2
+     269: ldc_w         #847                // float 1.7f
+     272: fmul
+     273: fconst_1
+     274: fadd
+     275: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     278: fload         7
+     280: fmul
+     281: ldc_w         #697                // float 0.9f
+     284: fmul
+     285: ldc_w         #843                // float 0.017453292f
+     288: fmul
+     289: invokevirtual #850                // Method org/joml/Quaternionf.rotateX:(F)Lorg/joml/Quaternionf;
+     292: pop
+     293: goto          666
+     296: aload_0
+     297: iconst_5
+     298: faload
+     299: fconst_0
+     300: fcmpl
+     301: iflt          413
+     304: getstatic     #852                // Field GUARD:[[F
+     307: invokestatic  #835                // Method length:([[F)F
+     310: fstore        7
+     312: aload_0
+     313: bipush        6
+     315: faload
+     316: fconst_0
+     317: fcmpg
+     318: ifge          329
+     321: fload_2
+     322: aload_0
+     323: iconst_5
+     324: faload
+     325: fsub
+     326: goto          344
+     329: fload         7
+     331: fload_2
+     332: aload_0
+     333: bipush        6
+     335: faload
+     336: fsub
+     337: fload         7
+     339: fmul
+     340: ldc           #33                 // float 4.0f
+     342: fdiv
+     343: fsub
+     344: fstore        8
+     346: getstatic     #852                // Field GUARD:[[F
+     349: fload         8
+     351: invokestatic  #764                // Method sampleDense:([[FF)V
+     354: ldc_w         #853                // float 4000000.0f
+     357: aload_0
+     358: iconst_5
+     359: faload
+     360: fadd
+     361: fstore        5
+     363: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     366: dup
+     367: getfield      #221                // Field org/joml/Vector3f.x:F
+     370: ldc_w         #854                // float 0.015f
+     373: aload_0
+     374: bipush        7
+     376: faload
+     377: fmul
+     378: fload_2
+     379: ldc_w         #855                // float 3.1f
+     382: fmul
+     383: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     386: fmul
+     387: fadd
+     388: putfield      #221                // Field org/joml/Vector3f.x:F
+     391: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     394: dup
+     395: getfield      #296                // Field org/joml/Vector3f.y:F
+     398: ldc_w         #608                // float 0.01f
+     401: aload_0
+     402: bipush        7
+     404: faload
+     405: fmul
+     406: fsub
+     407: putfield      #296                // Field org/joml/Vector3f.y:F
+     410: goto          666
+     413: aload_0
+     414: iconst_2
+     415: faload
+     416: f2i
+     417: iconst_0
+     418: getstatic     #620                // Field CUTS:[[[F
+     421: arraylength
+     422: iconst_1
+     423: isub
+     424: invokestatic  #124                // Method net/minecraft/util/Mth.m_14045_:(III)I
+     427: istore        7
+     429: getstatic     #620                // Field CUTS:[[[F
+     432: iload         7
+     434: aaload
+     435: astore        8
+     437: aload_0
+     438: bipush        10
+     440: faload
+     441: fconst_0
+     442: fcmpl
+     443: ifle          455
+     446: getstatic     #118                // Field HIT:[F
+     449: iload         7
+     451: faload
+     452: goto          458
+     455: ldc_w         #614                // float -1.0f
+     458: fstore        9
+     460: fload_2
+     461: aload_0
+     462: iconst_1
+     463: faload
+     464: fsub
+     465: fload         9
+     467: getstatic     #625                // Field HIT_STOP:[F
+     470: iload         7
+     472: faload
+     473: invokestatic  #627                // Method warp:(FFF)F
+     476: fstore        10
+     478: fload         10
+     480: aload         8
+     482: arraylength
+     483: iconst_1
+     484: isub
+     485: i2f
+     486: ldc_w         #856                // float 0.25f
+     489: fmul
+     490: fcmpg
+     491: ifge          521
+     494: aload         8
+     496: fload         10
+     498: invokestatic  #764                // Method sampleDense:([[FF)V
+     501: ldc_w         #857                // float 5000000.0f
+     504: aload_0
+     505: iconst_1
+     506: faload
+     507: fadd
+     508: iload         7
+     510: i2f
+     511: ldc_w         #856                // float 0.25f
+     514: fmul
+     515: fadd
+     516: fstore        5
+     518: goto          666
+     521: getstatic     #828                // Field sprint:F
+     524: getstatic     #828                // Field sprint:F
+     527: fmul
+     528: ldc_w         #858                // float 3.0f
+     531: fconst_2
+     532: getstatic     #828                // Field sprint:F
+     535: fmul
+     536: fsub
+     537: fmul
+     538: fstore        11
+     540: getstatic     #860                // Field GOAL_TURN:Lorg/joml/Quaternionf;
+     543: getstatic     #862                // Field SPRINT:[F
+     546: iconst_1
+     547: faload
+     548: getstatic     #862                // Field SPRINT:[F
+     551: iconst_2
+     552: faload
+     553: getstatic     #862                // Field SPRINT:[F
+     556: iconst_3
+     557: faload
+     558: getstatic     #862                // Field SPRINT:[F
+     561: iconst_4
+     562: faload
+     563: invokevirtual #865                // Method org/joml/Quaternionf.set:(FFFF)Lorg/joml/Quaternionf;
+     566: pop
+     567: getstatic     #867                // Field READY_TURN:Lorg/joml/Quaternionf;
+     570: getstatic     #817                // Field READY:[F
+     573: iconst_0
+     574: faload
+     575: getstatic     #817                // Field READY:[F
+     578: iconst_1
+     579: faload
+     580: getstatic     #817                // Field READY:[F
+     583: iconst_2
+     584: faload
+     585: getstatic     #817                // Field READY:[F
+     588: iconst_3
+     589: faload
+     590: invokevirtual #865                // Method org/joml/Quaternionf.set:(FFFF)Lorg/joml/Quaternionf;
+     593: getstatic     #860                // Field GOAL_TURN:Lorg/joml/Quaternionf;
+     596: fload         11
+     598: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     601: invokevirtual #871                // Method org/joml/Quaternionf.slerp:(Lorg/joml/Quaternionfc;FLorg/joml/Quaternionf;)Lorg/joml/Quaternionf;
+     604: pop
+     605: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     608: fload         11
+     610: getstatic     #817                // Field READY:[F
+     613: iconst_4
+     614: faload
+     615: getstatic     #862                // Field SPRINT:[F
+     618: iconst_5
+     619: faload
+     620: invokestatic  #655                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     623: fload         11
+     625: getstatic     #817                // Field READY:[F
+     628: iconst_5
+     629: faload
+     630: getstatic     #862                // Field SPRINT:[F
+     633: bipush        6
+     635: faload
+     636: invokestatic  #655                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     639: fload         11
+     641: getstatic     #817                // Field READY:[F
+     644: bipush        6
+     646: faload
+     647: getstatic     #862                // Field SPRINT:[F
+     650: bipush        7
+     652: faload
+     653: invokestatic  #655                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     656: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     659: pop
+     660: iconst_0
+     661: istore        4
+     663: fconst_0
+     664: fstore        5
+     666: fload         5
+     668: getstatic     #873                // Field source:F
+     671: fcmpl
+     672: ifeq          721
+     675: fload         5
+     677: putstatic     #873                // Field source:F
+     680: fload         5
+     682: ldc_w         #857                // float 5000000.0f
+     685: fcmpl
+     686: iflt          693
+     689: fconst_1
+     690: goto          694
+     693: fconst_2
+     694: putstatic     #875                // Field blendLength:F
+     697: fload_2
+     698: putstatic     #877                // Field blendAt:F
+     701: getstatic     #879                // Field FROM:Lorg/joml/Quaternionf;
+     704: getstatic     #881                // Field SHOWN:Lorg/joml/Quaternionf;
+     707: invokevirtual #884                // Method org/joml/Quaternionf.set:(Lorg/joml/Quaternionfc;)Lorg/joml/Quaternionf;
+     710: pop
+     711: getstatic     #886                // Field FROM_SHIFT:Lorg/joml/Vector3f;
+     714: getstatic     #888                // Field SHOWN_SHIFT:Lorg/joml/Vector3f;
+     717: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     720: pop
+     721: fload_2
+     722: getstatic     #877                // Field blendAt:F
+     725: fsub
+     726: getstatic     #875                // Field blendLength:F
+     729: fdiv
+     730: fstore        7
+     732: fload         7
+     734: fconst_1
+     735: fcmpg
+     736: ifge          838
+     739: fload         7
+     741: fload         7
+     743: fmul
+     744: ldc_w         #858                // float 3.0f
+     747: fconst_2
+     748: fload         7
+     750: fmul
+     751: fsub
+     752: fmul
+     753: fstore        7
+     755: getstatic     #860                // Field GOAL_TURN:Lorg/joml/Quaternionf;
+     758: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     761: invokevirtual #884                // Method org/joml/Quaternionf.set:(Lorg/joml/Quaternionfc;)Lorg/joml/Quaternionf;
+     764: pop
+     765: getstatic     #879                // Field FROM:Lorg/joml/Quaternionf;
+     768: getstatic     #860                // Field GOAL_TURN:Lorg/joml/Quaternionf;
+     771: fload         7
+     773: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     776: invokevirtual #871                // Method org/joml/Quaternionf.slerp:(Lorg/joml/Quaternionfc;FLorg/joml/Quaternionf;)Lorg/joml/Quaternionf;
+     779: pop
+     780: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     783: fload         7
+     785: getstatic     #886                // Field FROM_SHIFT:Lorg/joml/Vector3f;
+     788: getfield      #221                // Field org/joml/Vector3f.x:F
+     791: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     794: getfield      #221                // Field org/joml/Vector3f.x:F
+     797: invokestatic  #655                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     800: fload         7
+     802: getstatic     #886                // Field FROM_SHIFT:Lorg/joml/Vector3f;
+     805: getfield      #296                // Field org/joml/Vector3f.y:F
+     808: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     811: getfield      #296                // Field org/joml/Vector3f.y:F
+     814: invokestatic  #655                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     817: fload         7
+     819: getstatic     #886                // Field FROM_SHIFT:Lorg/joml/Vector3f;
+     822: getfield      #297                // Field org/joml/Vector3f.z:F
+     825: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     828: getfield      #297                // Field org/joml/Vector3f.z:F
+     831: invokestatic  #655                // Method net/minecraft/util/Mth.m_14179_:(FFF)F
+     834: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     837: pop
+     838: fload_3
+     839: fconst_0
+     840: fcmpl
+     841: ifle          942
+     844: fload_3
+     845: iload         4
+     847: ifeq          856
+     850: ldc_w         #889                // float 0.35f
+     853: goto          857
+     856: fconst_1
+     857: fmul
+     858: fstore        8
+     860: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     863: fload_2
+     864: ldc_w         #890                // float 0.055f
+     867: fmul
+     868: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     871: ldc_w         #891                // float 1.4f
+     874: fmul
+     875: fload         8
+     877: fmul
+     878: ldc_w         #843                // float 0.017453292f
+     881: fmul
+     882: invokevirtual #846                // Method org/joml/Quaternionf.rotateZ:(F)Lorg/joml/Quaternionf;
+     885: pop
+     886: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     889: fload_2
+     890: ldc_w         #892                // float 0.041f
+     893: fmul
+     894: ldc_w         #893                // float 0.7f
+     897: fadd
+     898: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     901: ldc_w         #697                // float 0.9f
+     904: fmul
+     905: fload         8
+     907: fmul
+     908: ldc_w         #843                // float 0.017453292f
+     911: fmul
+     912: invokevirtual #850                // Method org/joml/Quaternionf.rotateX:(F)Lorg/joml/Quaternionf;
+     915: pop
+     916: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     919: dup
+     920: getfield      #296                // Field org/joml/Vector3f.y:F
+     923: fload_2
+     924: ldc_w         #894                // float 0.083f
+     927: fmul
+     928: invokestatic  #233                // Method net/minecraft/util/Mth.m_14031_:(F)F
+     931: ldc_w         #895                // float 0.006f
+     934: fmul
+     935: fload         8
+     937: fmul
+     938: fadd
+     939: putfield      #296                // Field org/joml/Vector3f.y:F
+     942: getstatic     #881                // Field SHOWN:Lorg/joml/Quaternionf;
+     945: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     948: invokevirtual #884                // Method org/joml/Quaternionf.set:(Lorg/joml/Quaternionfc;)Lorg/joml/Quaternionf;
+     951: pop
+     952: getstatic     #888                // Field SHOWN_SHIFT:Lorg/joml/Vector3f;
+     955: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     958: invokevirtual #351                // Method org/joml/Vector3f.set:(Lorg/joml/Vector3fc;)Lorg/joml/Vector3f;
+     961: pop
+     962: iload         4
+     964: ireturn
+
+  private static float length(float[][]);
+    Code:
+       0: aload_0
+       1: arraylength
+       2: iconst_1
+       3: isub
+       4: i2f
+       5: ldc_w         #856                // float 0.25f
+       8: fmul
+       9: freturn
+
+  private static void sampleDense(float[][], float);
+    Code:
+       0: fload_1
+       1: ldc_w         #856                // float 0.25f
+       4: fdiv
+       5: fconst_0
+       6: aload_0
+       7: arraylength
+       8: i2f
+       9: fconst_1
+      10: fsub
+      11: invokestatic  #661                // Method net/minecraft/util/Mth.m_14036_:(FFF)F
+      14: fstore_2
+      15: fload_2
+      16: f2i
+      17: aload_0
+      18: arraylength
+      19: iconst_2
+      20: isub
+      21: invokestatic  #908                // Method java/lang/Math.min:(II)I
+      24: istore_3
+      25: fload_2
+      26: iload_3
+      27: i2f
+      28: fsub
+      29: fstore        4
+      31: aload_0
+      32: iconst_0
+      33: iload_3
+      34: iconst_1
+      35: isub
+      36: invokestatic  #910                // Method java/lang/Math.max:(II)I
+      39: aaload
+      40: astore        5
+      42: aload_0
+      43: iload_3
+      44: aaload
+      45: astore        6
+      47: aload_0
+      48: iload_3
+      49: iconst_1
+      50: iadd
+      51: aaload
+      52: astore        7
+      54: aload_0
+      55: aload_0
+      56: arraylength
+      57: iconst_1
+      58: isub
+      59: iload_3
+      60: iconst_2
+      61: iadd
+      62: invokestatic  #908                // Method java/lang/Math.min:(II)I
+      65: aaload
+      66: astore        8
+      68: iconst_0
+      69: istore        9
+      71: iload         9
+      73: bipush        13
+      75: if_icmpge     117
+      78: getstatic     #912                // Field CURVE:[F
+      81: iload         9
+      83: iconst_1
+      84: iadd
+      85: aload         5
+      87: iload         9
+      89: faload
+      90: aload         6
+      92: iload         9
+      94: faload
+      95: aload         7
+      97: iload         9
+      99: faload
+     100: aload         8
+     102: iload         9
+     104: faload
+     105: fload         4
+     107: invokestatic  #916                // Method catmull:(FFFFF)F
+     110: fastore
+     111: iinc          9, 1
+     114: goto          71
+     117: getstatic     #380                // Field SHR:Lorg/joml/Vector3f;
+     120: getstatic     #912                // Field CURVE:[F
+     123: bipush        8
+     125: faload
+     126: getstatic     #912                // Field CURVE:[F
+     129: bipush        9
+     131: faload
+     132: getstatic     #912                // Field CURVE:[F
+     135: bipush        10
+     137: faload
+     138: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     141: pop
+     142: getstatic     #389                // Field SHL:Lorg/joml/Vector3f;
+     145: getstatic     #912                // Field CURVE:[F
+     148: bipush        11
+     150: faload
+     151: getstatic     #912                // Field CURVE:[F
+     154: bipush        12
+     156: faload
+     157: getstatic     #912                // Field CURVE:[F
+     160: bipush        13
+     162: faload
+     163: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     166: pop
+     167: getstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     170: getstatic     #912                // Field CURVE:[F
+     173: iconst_1
+     174: faload
+     175: getstatic     #912                // Field CURVE:[F
+     178: iconst_2
+     179: faload
+     180: getstatic     #912                // Field CURVE:[F
+     183: iconst_3
+     184: faload
+     185: getstatic     #912                // Field CURVE:[F
+     188: iconst_4
+     189: faload
+     190: invokevirtual #865                // Method org/joml/Quaternionf.set:(FFFF)Lorg/joml/Quaternionf;
+     193: invokevirtual #919                // Method org/joml/Quaternionf.normalize:()Lorg/joml/Quaternionf;
+     196: pop
+     197: getstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     200: getstatic     #912                // Field CURVE:[F
+     203: iconst_5
+     204: faload
+     205: getstatic     #912                // Field CURVE:[F
+     208: bipush        6
+     210: faload
+     211: getstatic     #912                // Field CURVE:[F
+     214: bipush        7
+     216: faload
+     217: invokevirtual #385                // Method org/joml/Vector3f.set:(FFF)Lorg/joml/Vector3f;
+     220: pop
+     221: return
+
+  private static float catmull(float, float, float, float, float);
+    Code:
+       0: fload         4
+       2: fload         4
+       4: fmul
+       5: fstore        5
+       7: fload         5
+       9: fload         4
+      11: fmul
+      12: fstore        6
+      14: ldc           #35                 // float 0.5f
+      16: fconst_2
+      17: fload_1
+      18: fmul
+      19: fload_2
+      20: fload_0
+      21: fsub
+      22: fload         4
+      24: fmul
+      25: fadd
+      26: fconst_2
+      27: fload_0
+      28: fmul
+      29: ldc_w         #926                // float 5.0f
+      32: fload_1
+      33: fmul
+      34: fsub
+      35: ldc           #33                 // float 4.0f
+      37: fload_2
+      38: fmul
+      39: fadd
+      40: fload_3
+      41: fsub
+      42: fload         5
+      44: fmul
+      45: fadd
+      46: ldc_w         #858                // float 3.0f
+      49: fload_1
+      50: fmul
+      51: fload_0
+      52: fsub
+      53: ldc_w         #858                // float 3.0f
+      56: fload_2
+      57: fmul
+      58: fsub
+      59: fload_3
+      60: fadd
+      61: fload         6
+      63: fmul
+      64: fadd
+      65: fmul
+      66: freturn
+
+  static {};
+    Code:
+       0: getstatic     #932                // Field com/hypernhieis/client/ExcaliburHandKeys.WAVE:[[F
+       3: putstatic     #618                // Field WAVE:[[F
+       6: getstatic     #933                // Field com/hypernhieis/client/ExcaliburHandKeys.CHARGE:[[F
+       9: putstatic     #839                // Field CHARGE:[[F
+      12: getstatic     #934                // Field com/hypernhieis/client/ExcaliburHandKeys.STRIKE:[[F
+      15: putstatic     #832                // Field STRIKE:[[F
+      18: getstatic     #935                // Field com/hypernhieis/client/ExcaliburHandKeys.GUARD:[[F
+      21: putstatic     #852                // Field GUARD:[[F
+      24: bipush        8
+      26: newarray       float
+      28: dup
+      29: iconst_0
+      30: ldc           #33                 // float 4.0f
+      32: fastore
+      33: dup
+      34: iconst_1
+      35: ldc_w         #936                // float -0.25836f
+      38: fastore
+      39: dup
+      40: iconst_2
+      41: ldc_w         #937                // float 0.18554f
+      44: fastore
+      45: dup
+      46: iconst_3
+      47: ldc_w         #938                // float -0.26206f
+      50: fastore
+      51: dup
+      52: iconst_4
+      53: ldc_w         #939                // float 0.91113f
+      56: fastore
+      57: dup
+      58: iconst_5
+      59: ldc_w         #940                // float 0.1f
+      62: fastore
+      63: dup
+      64: bipush        6
+      66: ldc_w         #941                // float -0.08f
+      69: fastore
+      70: dup
+      71: bipush        7
+      73: fconst_0
+      74: fastore
+      75: putstatic     #862                // Field SPRINT:[F
+      78: iconst_3
+      79: anewarray     #623                // class "[[F"
+      82: dup
+      83: iconst_0
+      84: getstatic     #944                // Field com/hypernhieis/client/ExcaliburHandKeys.CUT1:[[F
+      87: aastore
+      88: dup
+      89: iconst_1
+      90: getstatic     #947                // Field com/hypernhieis/client/ExcaliburHandKeys.CUT2:[[F
+      93: aastore
+      94: dup
+      95: iconst_2
+      96: getstatic     #950                // Field com/hypernhieis/client/ExcaliburHandKeys.CUT3:[[F
+      99: aastore
+     100: putstatic     #620                // Field CUTS:[[[F
+     103: iconst_3
+     104: newarray       float
+     106: dup
+     107: iconst_0
+     108: ldc_w         #951                // float 4.4f
+     111: fastore
+     112: dup
+     113: iconst_1
+     114: ldc_w         #951                // float 4.4f
+     117: fastore
+     118: dup
+     119: iconst_2
+     120: ldc_w         #952                // float 5.6f
+     123: fastore
+     124: putstatic     #118                // Field HIT:[F
+     127: iconst_3
+     128: newarray       float
+     130: dup
+     131: iconst_0
+     132: ldc_w         #953                // float 2.5f
+     135: fastore
+     136: dup
+     137: iconst_1
+     138: ldc_w         #953                // float 2.5f
+     141: fastore
+     142: dup
+     143: iconst_2
+     144: ldc_w         #954                // float 3.5f
+     147: fastore
+     148: putstatic     #625                // Field HIT_STOP:[F
+     151: new           #218                // class org/joml/Vector3f
+     154: dup
+     155: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     158: putstatic     #345                // Field BLADE:Lorg/joml/Vector3f;
+     161: new           #218                // class org/joml/Vector3f
+     164: dup
+     165: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     168: putstatic     #362                // Field MAIN:Lorg/joml/Vector3f;
+     171: new           #218                // class org/joml/Vector3f
+     174: dup
+     175: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     178: putstatic     #367                // Field HAND_OFFSET:Lorg/joml/Vector3f;
+     181: new           #218                // class org/joml/Vector3f
+     184: dup
+     185: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     188: putstatic     #378                // Field SH_MAIN:Lorg/joml/Vector3f;
+     191: new           #218                // class org/joml/Vector3f
+     194: dup
+     195: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     198: putstatic     #387                // Field SH_OFF:Lorg/joml/Vector3f;
+     201: new           #218                // class org/joml/Vector3f
+     204: dup
+     205: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     208: putstatic     #422                // Field ARM:Lorg/joml/Vector3f;
+     211: new           #218                // class org/joml/Vector3f
+     214: dup
+     215: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     218: putstatic     #432                // Field ARM_SIDE:Lorg/joml/Vector3f;
+     221: new           #218                // class org/joml/Vector3f
+     224: dup
+     225: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     228: putstatic     #443                // Field ARM_FRONT:Lorg/joml/Vector3f;
+     231: new           #447                // class org/joml/Matrix3f
+     234: dup
+     235: invokespecial #956                // Method org/joml/Matrix3f."<init>":()V
+     238: putstatic     #445                // Field BASIS:Lorg/joml/Matrix3f;
+     241: new           #218                // class org/joml/Vector3f
+     244: dup
+     245: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     248: putstatic     #380                // Field SHR:Lorg/joml/Vector3f;
+     251: new           #218                // class org/joml/Vector3f
+     254: dup
+     255: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     258: putstatic     #389                // Field SHL:Lorg/joml/Vector3f;
+     261: getstatic     #944                // Field com/hypernhieis/client/ExcaliburHandKeys.CUT1:[[F
+     264: iconst_0
+     265: aaload
+     266: putstatic     #817                // Field READY:[F
+     269: new           #208                // class org/joml/Quaternionf
+     272: dup
+     273: invokespecial #957                // Method org/joml/Quaternionf."<init>":()V
+     276: putstatic     #452                // Field ROLL:Lorg/joml/Quaternionf;
+     279: bipush        11
+     281: newarray       float
+     283: putstatic     #185                // Field STATE:[F
+     286: new           #208                // class org/joml/Quaternionf
+     289: dup
+     290: invokespecial #957                // Method org/joml/Quaternionf."<init>":()V
+     293: putstatic     #206                // Field TURN:Lorg/joml/Quaternionf;
+     296: new           #208                // class org/joml/Quaternionf
+     299: dup
+     300: invokespecial #957                // Method org/joml/Quaternionf."<init>":()V
+     303: putstatic     #860                // Field GOAL_TURN:Lorg/joml/Quaternionf;
+     306: new           #218                // class org/joml/Vector3f
+     309: dup
+     310: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     313: putstatic     #216                // Field SHIFT:Lorg/joml/Vector3f;
+     316: new           #218                // class org/joml/Vector3f
+     319: dup
+     320: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     323: putstatic     #295                // Field PIVOT:Lorg/joml/Vector3f;
+     326: new           #805                // class org/joml/Vector4f
+     329: dup
+     330: invokespecial #958                // Method org/joml/Vector4f."<init>":()V
+     333: putstatic     #802                // Field POINT:Lorg/joml/Vector4f;
+     336: new           #9                  // class com/mojang/blaze3d/vertex/PoseStack
+     339: dup
+     340: invokespecial #959                // Method com/mojang/blaze3d/vertex/PoseStack."<init>":()V
+     343: putstatic     #796                // Field PROBE:Lcom/mojang/blaze3d/vertex/PoseStack;
+     346: iconst_3
+     347: anewarray     #200                // class "[F"
+     350: dup
+     351: iconst_0
+     352: getstatic     #962                // Field com/hypernhieis/client/ExcaliburHandKeys.CUT1_STROKE:[F
+     355: aastore
+     356: dup
+     357: iconst_1
+     358: getstatic     #965                // Field com/hypernhieis/client/ExcaliburHandKeys.CUT2_STROKE:[F
+     361: aastore
+     362: dup
+     363: iconst_2
+     364: getstatic     #968                // Field com/hypernhieis/client/ExcaliburHandKeys.CUT3_STROKE:[F
+     367: aastore
+     368: putstatic     #622                // Field STROKE:[[F
+     371: getstatic     #969                // Field com/hypernhieis/client/ExcaliburHandKeys.WAVE_STROKE:[F
+     374: putstatic     #616                // Field WAVE_STROKE:[F
+     377: iconst_5
+     378: anewarray     #200                // class "[F"
+     381: dup
+     382: iconst_0
+     383: bipush        6
+     385: newarray       float
+     387: dup
+     388: iconst_0
+     389: ldc           #77                 // float 5.2f
+     391: fastore
+     392: dup
+     393: iconst_1
+     394: ldc_w         #427                // float 0.05f
+     397: fastore
+     398: dup
+     399: iconst_2
+     400: ldc_w         #970                // float 1.1f
+     403: fastore
+     404: dup
+     405: iconst_3
+     406: ldc_w         #889                // float 0.35f
+     409: fastore
+     410: dup
+     411: iconst_4
+     412: fconst_0
+     413: fastore
+     414: dup
+     415: iconst_5
+     416: fconst_0
+     417: fastore
+     418: aastore
+     419: dup
+     420: iconst_1
+     421: bipush        6
+     423: newarray       float
+     425: dup
+     426: iconst_0
+     427: ldc_w         #971                // float 4.6f
+     430: fastore
+     431: dup
+     432: iconst_1
+     433: ldc_w         #972                // float 0.14f
+     436: fastore
+     437: dup
+     438: iconst_2
+     439: ldc_w         #973                // float 1.06f
+     442: fastore
+     443: dup
+     444: iconst_3
+     445: ldc_w         #974                // float 0.85f
+     448: fastore
+     449: dup
+     450: iconst_4
+     451: fconst_0
+     452: fastore
+     453: dup
+     454: iconst_5
+     455: fconst_0
+     456: fastore
+     457: aastore
+     458: dup
+     459: iconst_2
+     460: bipush        6
+     462: newarray       float
+     464: dup
+     465: iconst_0
+     466: ldc_w         #975                // float 3.4f
+     469: fastore
+     470: dup
+     471: iconst_1
+     472: ldc_w         #976                // float 0.3f
+     475: fastore
+     476: dup
+     477: iconst_2
+     478: ldc_w         #977                // float 1.04f
+     481: fastore
+     482: dup
+     483: iconst_3
+     484: ldc           #42                 // float 0.6f
+     486: fastore
+     487: dup
+     488: iconst_4
+     489: ldc           #40                 // float 0.11f
+     491: fastore
+     492: dup
+     493: iconst_5
+     494: fconst_0
+     495: fastore
+     496: aastore
+     497: dup
+     498: iconst_3
+     499: bipush        6
+     501: newarray       float
+     503: dup
+     504: iconst_0
+     505: ldc_w         #978                // float 2.6f
+     508: fastore
+     509: dup
+     510: iconst_1
+     511: fconst_1
+     512: fastore
+     513: dup
+     514: iconst_2
+     515: ldc_w         #979                // float 1.2f
+     518: fastore
+     519: dup
+     520: iconst_3
+     521: ldc_w         #980                // float 0.45f
+     524: fastore
+     525: dup
+     526: iconst_4
+     527: ldc_w         #981                // float 0.07f
+     530: fastore
+     531: dup
+     532: iconst_5
+     533: ldc_w         #970                // float 1.1f
+     536: fastore
+     537: aastore
+     538: dup
+     539: iconst_4
+     540: bipush        6
+     542: newarray       float
+     544: dup
+     545: iconst_0
+     546: ldc_w         #982                // float 2.2f
+     549: fastore
+     550: dup
+     551: iconst_1
+     552: ldc_w         #983                // float 0.64f
+     555: fastore
+     556: dup
+     557: iconst_2
+     558: ldc_w         #973                // float 1.06f
+     561: fastore
+     562: dup
+     563: iconst_3
+     564: ldc_w         #696                // float 0.8f
+     567: fastore
+     568: dup
+     569: iconst_4
+     570: fconst_0
+     571: fastore
+     572: dup
+     573: iconst_5
+     574: fconst_0
+     575: fastore
+     576: aastore
+     577: putstatic     #632                // Field TRAIL_LAYERS:[[F
+     580: iconst_5
+     581: anewarray     #200                // class "[F"
+     584: dup
+     585: iconst_0
+     586: iconst_3
+     587: newarray       float
+     589: dup
+     590: iconst_0
+     591: fconst_1
+     592: fastore
+     593: dup
+     594: iconst_1
+     595: ldc_w         #984                // float 0.68f
+     598: fastore
+     599: dup
+     600: iconst_2
+     601: ldc_w         #985                // float 0.28f
+     604: fastore
+     605: aastore
+     606: dup
+     607: iconst_1
+     608: iconst_3
+     609: newarray       float
+     611: dup
+     612: iconst_0
+     613: fconst_1
+     614: fastore
+     615: dup
+     616: iconst_1
+     617: ldc_w         #986                // float 0.86f
+     620: fastore
+     621: dup
+     622: iconst_2
+     623: ldc           #35                 // float 0.5f
+     625: fastore
+     626: aastore
+     627: dup
+     628: iconst_2
+     629: iconst_3
+     630: newarray       float
+     632: dup
+     633: iconst_0
+     634: fconst_1
+     635: fastore
+     636: dup
+     637: iconst_1
+     638: ldc_w         #987                // float 0.98f
+     641: fastore
+     642: dup
+     643: iconst_2
+     644: ldc_w         #697                // float 0.9f
+     647: fastore
+     648: aastore
+     649: dup
+     650: iconst_3
+     651: iconst_3
+     652: newarray       float
+     654: dup
+     655: iconst_0
+     656: ldc_w         #988                // float 0.78f
+     659: fastore
+     660: dup
+     661: iconst_1
+     662: ldc_w         #986                // float 0.86f
+     665: fastore
+     666: dup
+     667: iconst_2
+     668: fconst_1
+     669: fastore
+     670: aastore
+     671: dup
+     672: iconst_4
+     673: iconst_3
+     674: newarray       float
+     676: dup
+     677: iconst_0
+     678: fconst_1
+     679: fastore
+     680: dup
+     681: iconst_1
+     682: ldc_w         #989                // float 0.97f
+     685: fastore
+     686: dup
+     687: iconst_2
+     688: ldc_w         #986                // float 0.86f
+     691: fastore
+     692: aastore
+     693: putstatic     #691                // Field TRAIL_TINT:[[F
+     696: iconst_5
+     697: anewarray     #12                 // class com/hypernhieis/client/render/ExcaliburPaint$Sheet
+     700: dup
+     701: iconst_0
+     702: getstatic     #992                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.SLASH:Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     705: aastore
+     706: dup
+     707: iconst_1
+     708: getstatic     #995                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.SWEEP:Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     711: aastore
+     712: dup
+     713: iconst_2
+     714: getstatic     #998                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.STREAK:Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     717: aastore
+     718: dup
+     719: iconst_3
+     720: getstatic     #998                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.STREAK:Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     723: aastore
+     724: dup
+     725: iconst_4
+     726: getstatic     #992                // Field com/hypernhieis/client/render/ExcaliburPaint$Sheet.SLASH:Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     729: aastore
+     730: putstatic     #641                // Field TRAIL_SHEET:[Lcom/hypernhieis/client/render/ExcaliburPaint$Sheet;
+     733: iconst_3
+     734: newarray       float
+     736: dup
+     737: iconst_0
+     738: fconst_1
+     739: fastore
+     740: dup
+     741: iconst_1
+     742: ldc_w         #989                // float 0.97f
+     745: fastore
+     746: dup
+     747: iconst_2
+     748: ldc_w         #697                // float 0.9f
+     751: fastore
+     752: putstatic     #708                // Field STAR_TINT:[F
+     755: new           #218                // class org/joml/Vector3f
+     758: dup
+     759: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     762: putstatic     #558                // Field SEEN_GUARD:Lorg/joml/Vector3f;
+     765: new           #218                // class org/joml/Vector3f
+     768: dup
+     769: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     772: putstatic     #560                // Field SEEN_TIP:Lorg/joml/Vector3f;
+     775: new           #532                // class org/joml/Matrix4f
+     778: dup
+     779: invokespecial #999                // Method org/joml/Matrix4f."<init>":()V
+     782: putstatic     #524                // Field HAND:Lorg/joml/Matrix4f;
+     785: new           #218                // class org/joml/Vector3f
+     788: dup
+     789: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     792: putstatic     #353                // Field REST_GUARD:Lorg/joml/Vector3f;
+     795: new           #218                // class org/joml/Vector3f
+     798: dup
+     799: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     802: putstatic     #347                // Field REST_TIP:Lorg/joml/Vector3f;
+     805: new           #218                // class org/joml/Vector3f
+     808: dup
+     809: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     812: putstatic     #683                // Field GUARD_FROM:Lorg/joml/Vector3f;
+     815: new           #218                // class org/joml/Vector3f
+     818: dup
+     819: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     822: putstatic     #685                // Field TIP_FROM:Lorg/joml/Vector3f;
+     825: new           #218                // class org/joml/Vector3f
+     828: dup
+     829: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     832: putstatic     #671                // Field GUARD_TO:Lorg/joml/Vector3f;
+     835: new           #218                // class org/joml/Vector3f
+     838: dup
+     839: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     842: putstatic     #681                // Field TIP_TO:Lorg/joml/Vector3f;
+     845: new           #218                // class org/joml/Vector3f
+     848: dup
+     849: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     852: putstatic     #673                // Field GUARD_AT:Lorg/joml/Vector3f;
+     855: new           #218                // class org/joml/Vector3f
+     858: dup
+     859: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     862: putstatic     #675                // Field TIP_AT:Lorg/joml/Vector3f;
+     865: bipush        14
+     867: newarray       float
+     869: putstatic     #912                // Field CURVE:[F
+     872: new           #208                // class org/joml/Quaternionf
+     875: dup
+     876: invokespecial #957                // Method org/joml/Quaternionf."<init>":()V
+     879: putstatic     #881                // Field SHOWN:Lorg/joml/Quaternionf;
+     882: new           #208                // class org/joml/Quaternionf
+     885: dup
+     886: invokespecial #957                // Method org/joml/Quaternionf."<init>":()V
+     889: putstatic     #879                // Field FROM:Lorg/joml/Quaternionf;
+     892: new           #208                // class org/joml/Quaternionf
+     895: dup
+     896: invokespecial #957                // Method org/joml/Quaternionf."<init>":()V
+     899: putstatic     #867                // Field READY_TURN:Lorg/joml/Quaternionf;
+     902: new           #218                // class org/joml/Vector3f
+     905: dup
+     906: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     909: putstatic     #888                // Field SHOWN_SHIFT:Lorg/joml/Vector3f;
+     912: new           #218                // class org/joml/Vector3f
+     915: dup
+     916: invokespecial #955                // Method org/joml/Vector3f."<init>":()V
+     919: putstatic     #886                // Field FROM_SHIFT:Lorg/joml/Vector3f;
+     922: ldc_w         #1000               // float NaNf
+     925: putstatic     #873                // Field source:F
+     928: ldc_w         #1001               // float -100.0f
+     931: putstatic     #877                // Field blendAt:F
+     934: fconst_2
+     935: putstatic     #875                // Field blendLength:F
+     938: return
+}

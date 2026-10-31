@@ -1,0 +1,50 @@
+# Gradle
+.gradle/
+build/
+build-*/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Minecraft / Forge dev run directories and test output
+run/
+run-data/
+runs/
+audit-run-*/
+tank-tests-*/
+fix-backup-*/
+logs/
+crash-reports/
+*.log
+player-bytecode.txt
+
+# Generated
+out/
+bin/
+generated/.cache/
+*.class
+*.lock
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+eclipse/
+.metadata/
+.factorypath
+*.launch
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets / local config
+local.properties
+.env
+.env.*
+*.pem
+*.jks
+*.keystore

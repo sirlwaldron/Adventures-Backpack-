@@ -1,0 +1,1 @@
+{"required":true,"minVersion":"0.8","package":"com.waldron.adventurerspack.mixin","compatibilityLevel":"JAVA_17","mixins":["ToolInventoryMixin","ToolPlayerMixin"],"client":["GuiHotbarMixin","PackInventoryScaleMixin","PackSlotHighlightMixin","PackIpnHighlightMixin","PackIpnHintsMixin"],"injectors":{"defaultRequire":1}}

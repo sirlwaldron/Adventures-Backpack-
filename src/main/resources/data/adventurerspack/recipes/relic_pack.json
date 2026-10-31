@@ -1,0 +1,7 @@
+{
+  "type": "adventurerspack:pack_tier",
+  "category": "equipment",
+  "from": 3,
+  "center": { "item": "minecraft:nether_star" },
+  "sides": { "item": "minecraft:netherite_ingot" }
+}

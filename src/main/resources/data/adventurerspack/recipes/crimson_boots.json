@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "C C",
+    "C C"
+  ],
+  "key": {
+    "C": {
+      "item": "adventurerspack:crimson_ingot"
+    }
+  },
+  "result": {
+    "item": "adventurerspack:ignis_boots"
+  }
+}

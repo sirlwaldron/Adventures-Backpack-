@@ -1,0 +1,7 @@
+{
+  "type": "adventurerspack:pack_tier",
+  "category": "equipment",
+  "from": 2,
+  "center": { "item": "minecraft:amethyst_shard" },
+  "sides": { "item": "minecraft:diamond" }
+}

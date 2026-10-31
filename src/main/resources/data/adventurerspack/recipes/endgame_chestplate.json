@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "E E",
+    "EEE",
+    "EEE"
+  ],
+  "key": {
+    "E": {
+      "item": "adventurerspack:endgame_ingot"
+    }
+  },
+  "result": {
+    "item": "adventurerspack:cursium_mage_chestplate"
+  }
+}
